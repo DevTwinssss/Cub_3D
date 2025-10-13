@@ -1,6 +1,14 @@
 #ifndef CUB3D_H
 #define CUB3D_H
 
+// +++++++++++++++
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <mlx.h>
+#include <math.h>
+#include <X11/keysym.h>
+
 typedef struct s_player {
     double x;
     double y;
@@ -8,6 +16,12 @@ typedef struct s_player {
     double dir_y;
     double plane_x;
     double plane_y;
+	//+++++++++
+		
+	int move_up;
+    int move_down;
+    int move_left;
+    int move_right;
 } t_player;
 
 typedef struct s_config {
@@ -31,6 +45,12 @@ typedef struct s_game {
     t_player player;
     void *mlx;
     void *win;
+	// +++++++++++++++
+	void *img;
+	int *data;
+
+
+	
 } t_game;
 
 #endif
