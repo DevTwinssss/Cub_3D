@@ -10,8 +10,10 @@ void	draw_map(int *data);
 #define S 115
 #define E 100
 #define W 97
+#define left_rotate 65361
+#define right_rotate 65363
 #define speed 0.2
-
+#define PI 3.14159265358979323846
 
 #define screenWidth (mapWidth * tile_size)
 #define screenHeight (mapHeight * tile_size)
@@ -49,31 +51,27 @@ void draw_square(t_game *game, int x, int y, int size, int color)
             mlx_pixel_put(game->mlx, game->win, x + i, y + j, color);
 }
 
-void    draw_line(void *mlx, void *win, int x0, int y0, int x1, int y1, int color)
+// void draw_line(void *mlx, void *win, int x0, int y0, double x1, double y1, int length, int color)
+// {
+// 	// // direction based on angle
+// 	// double dx = cos(angle);
+// 	// double dy = sin(angle);
+
+// 	// loop to draw only "length" pixels
+// 	for (int i = 0; i < length; i++)
+// 	{
+// 		int x = x0 + (int)(x1 * i);
+// 		int y = y0 + (int)(y1 * i);
+// 		mlx_pixel_put(mlx, win, x, y, color);
+// 	}
+// }
+void draw_line(void *mlx, void *win, int x0, int y0, double dir_x, double dir_y, int length, int color)
 {
-    int dx = abs(x1 - x0);
-    int dy = abs(y1 - y0);
-    int sx = (x0 < x1) ? 1 : -1;
-    int sy = (y0 < y1) ? 1 : -1;
-    int err = dx - dy;
-
-    while (1)
+    for (int i = 0; i < length; i++)
     {
-        mlx_pixel_put(mlx, win, x0, y0, color); // draw pixel
-
-        if (x0 == x1 && y0 == y1)
-            break;
-        int e2 = 2 * err;
-        if (e2 > -dy)
-        {
-            err -= dy;
-            x0 += sx;
-        }
-        if (e2 < dx)
-        {
-            err += dx;
-            y0 += sy;
-        }
+        int x = x0 + (int)(dir_x * i);
+        int y = y0 + (int)(dir_y * i);
+        mlx_pixel_put(mlx, win, x, y, color);
     }
 }
 
@@ -89,12 +87,12 @@ int derections(int keycode, t_game *game)
 		game->player.dir_x = (game->player.x + 0) * 50;
 		game->player.dir_x = (game->player.y + 1) * 50;
 	}
-	if(keycode == 65363) // (1,0)
+	if(keycode == 65363) // (1,0) right
 	{
 		game->player.dir_x = (game->player.x + 1) * 50;
 		game->player.dir_x = (game->player.y + 0) * 50;
 	}
-	if(keycode == 65361) // (-1,0)
+	if(keycode == 65361) // (-1,0) left
 	{
 		game->player.dir_x = (game->player.x - 1) * 50;
 		game->player.dir_x = (game->player.y + 0) * 50;
@@ -107,13 +105,17 @@ int is_press(int keycode, t_game *game)
 {
 
 	if (keycode == N) //UP
-		game->player.move_up = 1, printf("in pres 1\n");
+		game->player.move_up = 1;
 	if (keycode == S) //down
-		game->player.move_down = 1, printf("in pres 2\n");
+		game->player.move_down = 1;
 	if (keycode == W) // left
-		game->player.move_left = 1, printf("in pres 3\n");
+		game->player.move_left = 1;
 	if (keycode == E) // right
-		game->player.move_right = 1, printf("in pres 4\n");
+		game->player.move_right = 1;
+	if(keycode == left_rotate)
+		game->player.left_rot = 1;
+	if(keycode == right_rotate)
+		game->player.right_rot = 1;
 	if (keycode == 65307) // esc
 		exit(0);
 
@@ -123,13 +125,17 @@ int is_press(int keycode, t_game *game)
 int release(int keycode, t_game *game)
 {
 	if (keycode == N) //UP
-		game->player.move_up = 0, printf("releaaas 1\n");
+		game->player.move_up = 0;
 	if (keycode == S) //down
-		game->player.move_down = 0, printf("releaaas 2\n");
+		game->player.move_down = 0;
 	if (keycode == W) // left
-		game->player.move_left = 0, printf("releaaas 3\n");
+		game->player.move_left = 0;
 	if (keycode == E) // right
-		game->player.move_right = 0, printf("releaaas 4\n");
+		game->player.move_right = 0;
+	if(keycode == left_rotate)
+		game->player.left_rot = 0;
+	if(keycode == right_rotate)
+		game->player.right_rot = 0;
 
 	return(0);
 }
@@ -192,19 +198,34 @@ int	press(t_game *game)
 			game->player.x = game->player.x + 1 * speed ; 
 			game->player.y = game->player.y + 0 * speed ;
 		}
-	}	
-	// if (keycode == 65307)
-	// {
-	// 	exit(-1);
-	// // 	ft_putstr_fd("You Exit The GAME\n", 1);
-	// // 	close_game(game);
-	// }
+	}
+	if(game->player.left_rot)
+	{
+
+		// int dirx = game->player.dir_x;
+		// int diry = game->player.dir_y;
+
+		game->player.player_angle -= 0.1 * (PI / 180);
+
+
+		game->player.dir_x =  cos(game->player.player_angle);
+		game->player.dir_y =  sin(game->player.player_angle);
+	
+
+		// game->player.dir_x = dirx * cos(game->player.player_angle) - diry * sin(game->player.player_angle);
+		// game->player.dir_y = dirx * sin(game->player.player_angle) + diry * cos(game->player.player_angle);
+	}
+	if(game->player.right_rot)
+	{
+		game->player.player_angle += 0.1 * (PI / 180);
+		game->player.dir_x =  cos(game->player.player_angle);
+		game->player.dir_y =  sin(game->player.player_angle);
+	}
 
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 	draw_square(game, game->player.x, game->player.y, playersize,  0x1026a3);
-	
 	draw_line(game->mlx, game->win, game->player.x, game->player.y,
-		game->player.dir_x, game->player.dir_y, 0x1eff00);
+		game->player.dir_x, game->player.dir_y, 500, 0x1eff00);
 
 
 	return (0);
@@ -249,33 +270,41 @@ int main()
 	int endian;
 
 	game = (t_game*) malloc(sizeof(t_game));
-
+	
 	// initt
+	game->player.player_angle = 0 * (PI / 180);
+
 	game->player.x = (screenWidth)/2 + 10;
 	game->player.y = (screenHeight)/2 - 6;
+	
 	game->player.move_up = 0;
     game->player.move_down = 0;
     game->player.move_left = 0;
     game->player.move_right = 0;
+	game->player.left_rot = 0;
+	game->player.right_rot = 0;
 
-	// game->player.dir_x = 0;
-	// game->player.dir_y = 1;
+	game->player.dir_x =  cos(game->player.player_angle);
+	game->player.dir_y =  sin(game->player.player_angle);
 
+	
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, screenWidth, screenHeight, "cub3d");
 	game->img = mlx_new_image(game->mlx, screenWidth, screenHeight);
 	game->data = (int *) mlx_get_data_addr(game->img, &bit_per_pixel, &line_len, &endian);
 
-
+	// draw
 	draw_map(game->data);
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 	draw_square(game, game->player.x , game->player.y, playersize, 0x1026a3);
-	
+	draw_line(game->mlx, game->win, game->player.x, game->player.y,
+		game->player.dir_x, game->player.dir_y, 500, 0x1eff00);
+
+	// hooks
 	mlx_hook(game->win, 2, 1L<<0 , is_press, game); // press in key  
 	mlx_hook(game->win, 3, 1L<<1 , release, game); // up the key
 	mlx_loop_hook(game->mlx, press, game); // loop to continue 
 
-	// mlx_key_hook(game->win, press, game);
 	
 	mlx_loop(game->mlx);
 	return(0);
@@ -291,8 +320,8 @@ int main()
 - draw map ~~~~~~~
 - draw player ~~~~~~~
 - move player ~~~~~~~
- 
-collision detection
+- collision detection basic ~~~~~~
+
 rotation
 and raycasting
 - Cast rays from a player’s position.

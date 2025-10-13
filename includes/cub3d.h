@@ -17,11 +17,15 @@ typedef struct s_player {
     double plane_x;
     double plane_y;
 	//+++++++++
-		
 	int move_up;
     int move_down;
     int move_left;
     int move_right;
+    int left_rot;
+    int right_rot;
+
+	double player_angle;
+
 } t_player;
 
 typedef struct s_config {
