@@ -7,6 +7,10 @@ SRC := $(wildcard src/*.c)\
 
 MLX_DIR = minilibx-linux
 
+
+%.o : %.c %.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
 all: $(NAME)
 
 $(NAME): $(SRC)

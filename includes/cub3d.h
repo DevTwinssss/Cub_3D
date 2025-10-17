@@ -6,7 +6,7 @@
 #define tile_size 32
 #define mapWidth 24
 #define mapHeight 21
-#define playersize 10
+#define playersize 7
 #define N 119
 #define S 115
 #define E 100
@@ -83,8 +83,7 @@ int		release(int keycode, t_game *game);
 int		press(t_game *game);
 void	draw_square(t_game *game, int x, int y, int size, int color);
 void	draw_line(void *mlx, void *win, int x0, int y0, double dir_x, double dir_y, int length, int color);
-
-
+void	cast_rays(t_game *game);
 
 
 

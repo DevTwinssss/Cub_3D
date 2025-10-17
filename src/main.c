@@ -74,6 +74,33 @@ void	draw_map(int *data)
 	}
 }
 
+void cast_rays(t_game *game)
+{
+	double ray_angel = game->player.player_angle - (FOV/2);
+
+	double ray_angel2 = game->player.player_angle + (FOV/2);
+
+	draw_line(game->mlx, game->win, game->player.x, game->player.y,
+		game->player.dir_x, game->player.dir_y, 100, 0x1eff00);
+
+	draw_line(game->mlx, game->win, game->player.x, game->player.y,
+			cos(ray_angel), sin(ray_angel), 100,0xff0000);
+
+	draw_line(game->mlx, game->win, game->player.x, game->player.y,
+			cos(ray_angel2), sin(ray_angel2), 100, 0x2600ff);
+
+	while (ray_angel < ray_angel2)
+	{
+		ray_angel += FOV/50;
+		draw_line(game->mlx, game->win, game->player.x, game->player.y,
+			cos(ray_angel), sin(ray_angel), 100, 0xff00d4);
+
+		/* code */
+	}
+	
+
+}
+
 int main()
 {
 	t_game *game;
@@ -109,8 +136,8 @@ int main()
 	draw_map(game->data);
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 	draw_square(game, game->player.x , game->player.y, playersize, 0x1026a3);
-	draw_line(game->mlx, game->win, game->player.x, game->player.y,
-		game->player.dir_x, game->player.dir_y, 500, 0x1eff00);
+
+
 
 	// hooks
 	mlx_hook(game->win, 2, 1L<<0 , is_press, game); // press in key  
@@ -134,11 +161,9 @@ int main()
 - move player ~~~~~~~
 - collision detection basic ~~~~~~
 - rotation ~~~~~
+- Cast rays from a player’s position. ~~~~~~~
 
-- Cast rays from a player’s position.
 - Detect wall intersections.
 - Compute distances correctly (without distortion).
 - Project walls on screen in 3D.
-
-
 */
