@@ -143,77 +143,73 @@ int release(int keycode, t_game *game)
 
 int	press(t_game *game)
 {
-	int x, y;
-	// derections(keycode, game);
+	double x, y;
+	int mapx, mapy;
+
 	if (game->player.move_up == 1) //UP
 	{
-		printf("m up\n");
-		x = (int) (game->player.x + 0 * speed) / tile_size;
-		y = (int) (game->player.y - 1 * speed) / tile_size;
+		x = game->player.x + cos(game->player.player_angle) * speed;
+		y = game->player.y + sin(game->player.player_angle) * speed;
 
-		if(worldMap[y][x] == 0)
-		{
-			game->player.x = game->player.x + 0 * speed;
-			game->player.y = game->player.y - 1 * speed;
-		}
+		mapx = (int) x / tile_size;
+		mapy = (int) y / tile_size;
+
+		if(worldMap[(int)game->player.y / tile_size][mapx] == 0)
+			game->player.x = x;
+		
+		if(worldMap[mapy][(int)game->player.x / tile_size] == 0)
+			game->player.y = y;
+		
 
 	}
 	if (game->player.move_down) //down
 	{
-		printf("m down\n");
-
-		x = (int) (game->player.x + 0 * speed) / tile_size;
-		y = (int) (game->player.y + 1 * speed) / tile_size;
+		x = game->player.x - cos(game->player.player_angle) * speed;
+		y = game->player.y - sin(game->player.player_angle) * speed;
 	
-		if(worldMap[y][x] == 0)
-		{
-			game->player.x = game->player.x + 0 * speed ;
-			game->player.y = game->player.y + 1 * speed ;
-		}
+		mapx = (int) x / tile_size;
+		mapy = (int) y / tile_size;
+
+		if(worldMap[(int)game->player.y / tile_size][mapx] == 0)
+			game->player.x = x ;
+		
+		if(worldMap[mapy][(int)game->player.x / tile_size] == 0)
+			game->player.y = y ;
 
 	}	
 	if (game->player.move_left) // left
 	{
-		printf("m left\n");
-
-		x = (int) (game->player.x - 1 * speed) / tile_size;
-		y = (int) (game->player.y + 0 * speed) / tile_size;
+		x = game->player.x + sin(game->player.player_angle) * speed;
+		y = game->player.y - cos(game->player.player_angle) * speed;
 	
-		if(worldMap[y][x] == 0)
-		{
-			game->player.x = game->player.x - 1 * speed ; 
-			game->player.y = game->player.y + 0 * speed ;
-		}
+		mapx = (int) x / tile_size;
+		mapy = (int) y / tile_size;
+
+		if(worldMap[(int)game->player.y / tile_size][mapx] == 0)
+			game->player.x = x ; 
+		if(worldMap[mapy][(int)game->player.x / tile_size] == 0)
+			game->player.y = y ;
 
 	}	
 	if (game->player.move_right) // right
 	{
-		printf("m right\n");
-
-		x = (int) (game->player.x + 1 * speed) / tile_size;
-		y = (int) (game->player.y + 0 * speed) / tile_size;
+		x = game->player.x - sin(game->player.player_angle) * speed;
+		y = game->player.y + cos(game->player.player_angle) * speed;
 	
-		if(worldMap[y][x] == 0)
-		{
-			game->player.x = game->player.x + 1 * speed ; 
-			game->player.y = game->player.y + 0 * speed ;
-		}
+		mapx = (int) x / tile_size;
+		mapy = (int) y / tile_size;
+
+		if(worldMap[(int)game->player.y / tile_size][mapx] == 0)
+			game->player.x = x ; 
+		if(worldMap[mapy][(int)game->player.x / tile_size] == 0)
+			game->player.y = y ;
+		
 	}
 	if(game->player.left_rot)
 	{
-
-		// int dirx = game->player.dir_x;
-		// int diry = game->player.dir_y;
-
 		game->player.player_angle -= 0.1 * (PI / 180);
-
-
 		game->player.dir_x =  cos(game->player.player_angle);
 		game->player.dir_y =  sin(game->player.player_angle);
-	
-
-		// game->player.dir_x = dirx * cos(game->player.player_angle) - diry * sin(game->player.player_angle);
-		// game->player.dir_y = dirx * sin(game->player.player_angle) + diry * cos(game->player.player_angle);
 	}
 	if(game->player.right_rot)
 	{
