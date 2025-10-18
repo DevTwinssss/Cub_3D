@@ -76,24 +76,26 @@ void	draw_map(int *data)
 
 void cast_rays(t_game *game)
 {
+	int lenght_line = 300;
+
 	double ray_angel = game->player.player_angle - (FOV/2);
 
 	double ray_angel2 = game->player.player_angle + (FOV/2);
 
 	draw_line(game->mlx, game->win, game->player.x, game->player.y,
-		game->player.dir_x, game->player.dir_y, 100, 0x1eff00);
+		game->player.dir_x, game->player.dir_y, lenght_line, 0x1eff00);
 
 	draw_line(game->mlx, game->win, game->player.x, game->player.y,
-			cos(ray_angel), sin(ray_angel), 100,0xff0000);
+			cos(ray_angel), sin(ray_angel), lenght_line,0xff0000);
 
 	draw_line(game->mlx, game->win, game->player.x, game->player.y,
-			cos(ray_angel2), sin(ray_angel2), 100, 0x2600ff);
+			cos(ray_angel2), sin(ray_angel2), lenght_line, 0x2600ff);
 
 	while (ray_angel < ray_angel2)
 	{
 		ray_angel += FOV/50;
 		draw_line(game->mlx, game->win, game->player.x, game->player.y,
-			cos(ray_angel), sin(ray_angel), 100, 0xff00d4);
+			cos(ray_angel), sin(ray_angel), lenght_line, 0xff00d4);
 
 		/* code */
 	}

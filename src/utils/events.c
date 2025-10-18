@@ -115,8 +115,6 @@ int	press(t_game *game)
 
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 	draw_square(game, game->player.x, game->player.y, playersize,  0x1026a3);
-	// draw_line(game->mlx, game->win, game->player.x, game->player.y,
-	// 	game->player.dir_x, game->player.dir_y, 500, 0x1eff00);
 	cast_rays(game);
 
 
