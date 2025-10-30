@@ -6,20 +6,20 @@ int worldMap[mapHeight][mapWidth]=
   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
+  {1,0,0,0,0,0,1,1,1,1,1,0,0,0,0,1,0,1,0,1,0,0,0,1},
+  {1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,1},
+  {1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,1,1,0,1,1,0,0,0,0,1,0,1,0,1,0,0,0,1},
   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,5,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
@@ -36,7 +36,7 @@ void draw_square(t_game *game, int x, int y, int size, int color)
 void draw_line(void *mlx, void *win, int x0, int y0, double dir_x, double dir_y, int length, int color)
 {
     for (int i = 0; i < length; i++)
-    {
+    { 
         int x = x0 + (int)(dir_x * i);
         int y = y0 + (int)(dir_y * i);
         mlx_pixel_put(mlx, win, x, y, color);
@@ -74,33 +74,68 @@ void	draw_map(int *data)
 	}
 }
 
+void horizontal_intersection(t_game *game)
+{
+	double  first_x, first_y, next_x, next_y, xa, ya;
+
+
+	// find first intersection (y,x)
+	if(game->player.player_angle > 0 && game->player.player_angle < 180 * (PI / 180)) // looking down
+		first_y = floor(game->player.y / tile_size) * tile_size + tile_size; // find y-coordinate of the top border of that row
+	else // looking up
+		first_y = floor(game->player.y / tile_size) * tile_size - 1; // find y-coordinate of the top border of that row
+	first_x = (first_y - game->player.y) / tan(game->player.player_angle) + game->player.x;
+
+
+	// calculate the XA and YA
+	if(game->player.player_angle > 0 && game->player.player_angle < 180 * (PI / 180)) // looking down
+		ya = tile_size;
+	else 
+		ya = -tile_size;
+	xa = ya / tan(game->player.player_angle);
+
+	// find other intersections
+	next_x = first_x;
+	next_y = first_y;
+
+
+	while(worldMap[(int)(next_y / tile_size)][(int)(next_x / tile_size)] != 1)
+	{
+		next_x += xa;
+		next_y += ya;
+	}
+
+	game->player.horizo_hit_x = next_x;
+	game->player.horizo_hit_y = next_y;
+
+	printf("i will check po [%d][%d]\n", (int)(next_y / tile_size), (int)(next_x / tile_size));
+}
+
 void cast_rays(t_game *game)
 {
-	int lenght_line = 300;
+	int lenght_line = 550;
 
-	double ray_angel = game->player.player_angle - (FOV/2);
+	horizontal_intersection(game);
 
-	double ray_angel2 = game->player.player_angle + (FOV/2);
+	// double ray_angel = game->player.player_angle - (FOV/2);
+
+	// double ray_angel2 = game->player.player_angle + (FOV/2);
 
 	draw_line(game->mlx, game->win, game->player.x, game->player.y,
 		game->player.dir_x, game->player.dir_y, lenght_line, 0x1eff00);
 
-	draw_line(game->mlx, game->win, game->player.x, game->player.y,
-			cos(ray_angel), sin(ray_angel), lenght_line,0xff0000);
+	// draw_line(game->mlx, game->win, game->player.x, game->player.y,
+	// 		cos(ray_angel), sin(ray_angel), lenght_line,0xff0000);
 
-	draw_line(game->mlx, game->win, game->player.x, game->player.y,
-			cos(ray_angel2), sin(ray_angel2), lenght_line, 0x2600ff);
+	// draw_line(game->mlx, game->win, game->player.x, game->player.y,
+	// 		cos(ray_angel2), sin(ray_angel2), lenght_line, 0x2600ff);
 
-	while (ray_angel < ray_angel2)
-	{
-		ray_angel += FOV/50;
-		draw_line(game->mlx, game->win, game->player.x, game->player.y,
-			cos(ray_angel), sin(ray_angel), lenght_line, 0xff00d4);
-
-		/* code */
-	}
-	
-
+	// while (ray_angel < ray_angel2)
+	// {
+	// 	ray_angel += FOV/50;
+	// 	draw_line(game->mlx, game->win, game->player.x, game->player.y,
+	// 		cos(ray_angel), sin(ray_angel), lenght_line, 0xff00d4);
+	// }
 }
 
 int main()
@@ -113,7 +148,7 @@ int main()
 	game = (t_game*) malloc(sizeof(t_game));
 	
 	// initt
-	game->player.player_angle = 0 * (PI / 180);
+	game->player.player_angle = 290 * (PI / 180);
 
 	game->player.x = (screenWidth)/2 + 10;
 	game->player.y = (screenHeight)/2 - 6;
@@ -158,14 +193,12 @@ int main()
 
 
 /*
-- draw map ~~~~~~~
-- draw player ~~~~~~~
-- move player ~~~~~~~
-- collision detection basic ~~~~~~
-- rotation ~~~~~
-- Cast rays from a player’s position. ~~~~~~~
-
 - Detect wall intersections.
+ -> first (ax,ay) [ax  = (ay - py) / tan(z) + px] [ay =  floor(py / tilesize) * tilesize - 1] ~~~~~~
+ -> check others intersection [Xa = Ya / tan(angle)]
+ -> store HO_hit (wx, wy)
+
+
 - Compute distances correctly (without distortion).
 - Project walls on screen in 3D.
 */

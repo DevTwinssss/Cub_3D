@@ -43,6 +43,12 @@ typedef struct s_player {
     int move_right;
     int left_rot;
     int right_rot;
+	
+	double horizo_hit_x; 
+	double horizo_hit_y; 
+
+	double verti_hit_x; 
+	double verti_hit_y;
 
 	double player_angle;
 
@@ -84,6 +90,7 @@ int		press(t_game *game);
 void	draw_square(t_game *game, int x, int y, int size, int color);
 void	draw_line(void *mlx, void *win, int x0, int y0, double dir_x, double dir_y, int length, int color);
 void	cast_rays(t_game *game);
+void	horizontal_intersection(t_game *game);
 
 
 

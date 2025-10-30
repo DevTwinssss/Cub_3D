@@ -43,6 +43,7 @@ int	press(t_game *game)
 	double x, y;
 	int mapx, mapy;
 
+
 	if (game->player.move_up == 1) //UP
 	{
 		x = game->player.x + cos(game->player.player_angle) * speed;
