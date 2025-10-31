@@ -33,15 +33,45 @@ void draw_square(t_game *game, int x, int y, int size, int color)
             mlx_pixel_put(game->mlx, game->win, x + i, y + j, color);
 }
 
-void draw_line(void *mlx, void *win, int x0, int y0, double dir_x, double dir_y, int length, int color)
+/*
+we use the normalize angle to keep th angle between [0 - 2π]
+to give tan cos sin the correcte directions, and direction checks consistent
+*/
+
+double normalize_angle(double angle)
 {
-    for (int i = 0; i < length; i++)
-    { 
-        int x = x0 + (int)(dir_x * i);
-        int y = y0 + (int)(dir_y * i);
-        mlx_pixel_put(mlx, win, x, y, color);
+    angle = fmod(angle, 2 * PI); // remainder = angle mod 2π 
+    if (angle < 0) // handle negative values
+        angle += 2 * PI;
+    return angle;
+}
+
+
+double distance(double x1, double y1, double x2, double y2)
+{
+    return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
+}
+
+
+void draw_line(void *mlx, void *win, double x0, double y0, double x1, double y1, int color)
+{ // DDA algorithem
+    double dx = x1 - x0;
+    double dy = y1 - y0;
+    double steps = fabs(dx) > fabs(dy) ? fabs(dx) : fabs(dy);
+    double x_inc = dx / steps;
+    double y_inc = dy / steps;
+
+    double x = x0;
+    double y = y0;
+
+    for (int i = 0; i <= steps; i++)
+    {
+        mlx_pixel_put(mlx, win, (int)x, (int)y, color);
+        x += x_inc;
+        y += y_inc;
     }
 }
+
 
 void	draw_map(int *data)
 {
@@ -74,68 +104,129 @@ void	draw_map(int *data)
 	}
 }
 
-void horizontal_intersection(t_game *game)
+t_point vertical_intersection(t_game *game, double ray_angle)
 {
+	t_point hit;
 	double  first_x, first_y, next_x, next_y, xa, ya;
 
+	ray_angle = normalize_angle(ray_angle);
 
 	// find first intersection (y,x)
-	if(game->player.player_angle > 0 && game->player.player_angle < 180 * (PI / 180)) // looking down
-		first_y = floor(game->player.y / tile_size) * tile_size + tile_size; // find y-coordinate of the top border of that row
-	else // looking up
-		first_y = floor(game->player.y / tile_size) * tile_size - 1; // find y-coordinate of the top border of that row
-	first_x = (first_y - game->player.y) / tan(game->player.player_angle) + game->player.x;
+	if(ray_angle < (270 * (PI / 180)) && ray_angle > (90 * (PI / 180))) // looking left
+		first_x = floor(game->player.x / tile_size) * tile_size - 1; // find y-coordinate of the top border of that row
+	else // looking right
+		first_x = floor(game->player.x / tile_size) * tile_size + tile_size; // find y-coordinate of the top border of that row
+	first_y = tan(ray_angle) * (first_x - game->player.x) + game->player.y;
 
 
 	// calculate the XA and YA
-	if(game->player.player_angle > 0 && game->player.player_angle < 180 * (PI / 180)) // looking down
-		ya = tile_size;
+	if(ray_angle < (270 * (PI / 180)) && ray_angle > (90 * (PI / 180))) // looking left
+		xa = -tile_size;
 	else 
-		ya = -tile_size;
-	xa = ya / tan(game->player.player_angle);
+		xa = tile_size;
+	ya = xa * tan(ray_angle);
 
 	// find other intersections
 	next_x = first_x;
 	next_y = first_y;
 
-
-	while(worldMap[(int)(next_y / tile_size)][(int)(next_x / tile_size)] != 1)
+	printf("y = %d, x = %d\n", (int)(next_y / tile_size), (int)(next_x / tile_size));
+	while (next_x >= 0 && next_x < mapWidth * tile_size &&
+		next_y >= 0 && next_y < mapHeight * tile_size &&
+		worldMap[(int)(next_y / tile_size)][(int)(next_x / tile_size)] != 1)
 	{
 		next_x += xa;
 		next_y += ya;
 	}
 
-	game->player.horizo_hit_x = next_x;
-	game->player.horizo_hit_y = next_y;
+	hit.x = next_x;
+	hit.y = next_y;
 
-	printf("i will check po [%d][%d]\n", (int)(next_y / tile_size), (int)(next_x / tile_size));
+	return(hit);
 }
+
+// tan(z) = (ay - py) / (ax - px)
+
+t_point horizontal_intersection(t_game *game, double ray_angle)
+{
+	t_point hit;
+	double  first_x, first_y, next_x, next_y, xa, ya;
+
+
+	ray_angle = normalize_angle(ray_angle);
+
+
+	// find first intersection (y,x)
+	if(ray_angle > 0 && ray_angle < (180 * (PI / 180))) // looking down
+		first_y = floor(game->player.y / tile_size) * tile_size + tile_size; // find y-coordinate of the top border of that row
+	else // looking up
+		first_y = floor(game->player.y / tile_size) * tile_size - 1; // find y-coordinate of the top border of that row
+	first_x = (first_y - game->player.y) / tan(ray_angle) + game->player.x;
+
+
+	// calculate the XA and YA
+	if(ray_angle > 0 && ray_angle < (180 * (PI / 180))) // looking down
+		ya = tile_size;
+	else 
+		ya = -tile_size;
+	xa = ya / tan(ray_angle);
+
+	// find other intersections
+	next_x = first_x;
+	next_y = first_y;
+    while (next_x >= 0 && next_x < mapWidth * tile_size &&
+		next_y >= 0 && next_y < mapHeight * tile_size &&
+		worldMap[(int)(next_y / tile_size)][(int)(next_x / tile_size)] != 1)
+	{
+		next_x += xa;
+		next_y += ya;
+	}
+
+	hit.x = next_x;
+	hit.y = next_y;
+
+	return(hit);
+}
+
+// printf("i will check po [%d][%d]\n", (int)(next_y / tile_size), (int)(next_x / tile_size));
 
 void cast_rays(t_game *game)
 {
-	int lenght_line = 550;
 
-	horizontal_intersection(game);
+	t_point horizontal_hit ;//=  horizontal_intersection(game, game->player.player_angle);
+	t_point vertical_hit ;//=  vertical_intersection(game, game->player.player_angle);
 
-	// double ray_angel = game->player.player_angle - (FOV/2);
-
-	// double ray_angel2 = game->player.player_angle + (FOV/2);
-
-	draw_line(game->mlx, game->win, game->player.x, game->player.y,
-		game->player.dir_x, game->player.dir_y, lenght_line, 0x1eff00);
+	double ray_angel = game->player.player_angle - (FOV/2); // Start fov
+	double ray_angel2 = game->player.player_angle + (FOV/2); // End fov
 
 	// draw_line(game->mlx, game->win, game->player.x, game->player.y,
-	// 		cos(ray_angel), sin(ray_angel), lenght_line,0xff0000);
+	// 	horizontal_hit.x, horizontal_hit.y, 0x1eff00);
 
-	// draw_line(game->mlx, game->win, game->player.x, game->player.y,
-	// 		cos(ray_angel2), sin(ray_angel2), lenght_line, 0x2600ff);
+	while (ray_angel < ray_angel2)
+	{
+		horizontal_hit = horizontal_intersection(game, ray_angel);
+		vertical_hit =  vertical_intersection(game, ray_angel);
+		
+		double a = distance(game->player.x, game->player.y, horizontal_hit.x, horizontal_hit.y);
+		double b =  distance(game->player.x, game->player.y, vertical_hit.x, vertical_hit.y);
 
-	// while (ray_angel < ray_angel2)
-	// {
-	// 	ray_angel += FOV/50;
-	// 	draw_line(game->mlx, game->win, game->player.x, game->player.y,
-	// 		cos(ray_angel), sin(ray_angel), lenght_line, 0xff00d4);
-	// }
+
+		if(a < b) 
+		{
+			game->player.x_hit = horizontal_hit.x;
+			game->player.y_hit = horizontal_hit.y;
+		}
+		else 
+		{
+			game->player.x_hit = vertical_hit.x;
+			game->player.y_hit = vertical_hit.y;
+		}
+
+
+		draw_line(game->mlx, game->win, game->player.x, game->player.y,
+			game->player.x_hit, game->player.y_hit, 0xff00d4);
+		ray_angel += FOV/50;
+	}
 }
 
 int main()

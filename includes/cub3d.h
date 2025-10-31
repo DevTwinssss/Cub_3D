@@ -43,16 +43,22 @@ typedef struct s_player {
     int move_right;
     int left_rot;
     int right_rot;
-	
-	double horizo_hit_x; 
-	double horizo_hit_y; 
 
-	double verti_hit_x; 
-	double verti_hit_y;
+	double x_hit; 
+	double y_hit;
 
 	double player_angle;
 
 } t_player;
+
+
+typedef struct  s_point
+{
+	double x;
+	double y;
+
+}	t_point;
+
 
 typedef struct s_config {
     char *no_path;
@@ -88,9 +94,11 @@ int 	is_press(int keycode, t_game *game);
 int		release(int keycode, t_game *game);
 int		press(t_game *game);
 void	draw_square(t_game *game, int x, int y, int size, int color);
-void	draw_line(void *mlx, void *win, int x0, int y0, double dir_x, double dir_y, int length, int color);
+void	draw_line(void *mlx, void *win, double x0, double y0, double dir_x, double dir_y, int color);
 void	cast_rays(t_game *game);
-void	horizontal_intersection(t_game *game);
+t_point	horizontal_intersection(t_game *game, double ray_angle);
+double	distance(double x1, double y1, double x2, double y2);
+double	normalize_angle(double angle);
 
 
 
