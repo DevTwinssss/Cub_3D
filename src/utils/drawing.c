@@ -1,0 +1,108 @@
+#include "../../includes/cub3d.h"
+
+
+
+
+
+
+
+void draw_square(t_game *game, int x, int y, int size, int color)
+{
+    for (int i = 0; i < size; i++)
+        for (int j = 0; j < size; j++)
+            mlx_pixel_put(game->mlx, game->win, x + i, y + j, color);
+}
+
+
+
+void draw_line(void *mlx, void *win, double x0, double y0, double x1, double y1, int color)
+{ // DDA algorithem
+    double dx = x1 - x0;
+    double dy = y1 - y0;
+    double steps = fabs(dx) > fabs(dy) ? fabs(dx) : fabs(dy);
+    double x_inc = dx / steps;
+    double y_inc = dy / steps;
+
+    double x = x0;
+    double y = y0;
+
+    for (int i = 0; i <= steps; i++)
+    {
+        mlx_pixel_put(mlx, win, (int)x, (int)y, color);
+        x += x_inc;
+        y += y_inc;
+    }
+}
+
+
+void	draw_map(int *data)
+{
+	int (i), (j);
+	i = 0;
+	while (i < mapHeight)
+	{
+		j = 0;
+		while (j < mapWidth)
+		{
+			int color;
+			if (worldMap[i][j] == 0)
+				color = 0xffffff ;
+			else 
+				color = 0x4a045f;
+			
+			// fill tile
+			for (int a = 0;  a < tile_size - 1;  a++)
+			{
+				for (int b = 0;  b < tile_size - 1;  b++)
+				{	
+					int x = j * tile_size + a;
+					int y = i * tile_size + b;
+					data[y * screenWidth + x] = color;
+				}
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+
+
+void cast_rays(t_game *game)
+{
+
+	t_point horizontal_hit ;//=  horizontal_intersection(game, game->player.player_angle);
+	t_point vertical_hit ;//=  vertical_intersection(game, game->player.player_angle);
+
+	double ray_angel = game->player.player_angle - (FOV/2); // Start fov
+	double ray_angel2 = game->player.player_angle + (FOV/2); // End fov
+
+	// draw_line(game->mlx, game->win, game->player.x, game->player.y,
+	// 	horizontal_hit.x, horizontal_hit.y, 0x1eff00);
+
+	while (ray_angel < ray_angel2)
+	{
+		horizontal_hit = horizontal_intersection(game, ray_angel);
+		vertical_hit =  vertical_intersection(game, ray_angel);
+		
+		double a = distance(game->player.x, game->player.y, horizontal_hit.x, horizontal_hit.y);
+		double b =  distance(game->player.x, game->player.y, vertical_hit.x, vertical_hit.y);
+
+
+		if(a < b) 
+		{
+			game->player.x_hit = horizontal_hit.x;
+			game->player.y_hit = horizontal_hit.y;
+		}
+		else 
+		{
+			game->player.x_hit = vertical_hit.x;
+			game->player.y_hit = vertical_hit.y;
+		}
+
+
+		draw_line(game->mlx, game->win, game->player.x, game->player.y,
+			game->player.x_hit, game->player.y_hit, 0xff00d4);
+		ray_angel += FOV/50;
+	}
+}
