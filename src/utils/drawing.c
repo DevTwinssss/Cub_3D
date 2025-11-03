@@ -66,24 +66,23 @@ void	draw_map(int *data)
 	}
 }
 
-
-
 void cast_rays(t_game *game)
 {
 
 	t_point horizontal_hit ;//=  horizontal_intersection(game, game->player.player_angle);
 	t_point vertical_hit ;//=  vertical_intersection(game, game->player.player_angle);
 
-	double ray_angel = game->player.player_angle - (FOV/2); // Start fov
-	double ray_angel2 = game->player.player_angle + (FOV/2); // End fov
+	double ray_angle = game->player.player_angle - (FOV/2); // Start fov
+	// double ray_angle2 = game->player.player_angle + (FOV/2); // End fov
 
 	// draw_line(game->mlx, game->win, game->player.x, game->player.y,
 	// 	horizontal_hit.x, horizontal_hit.y, 0x1eff00);
 
-	while (ray_angel < ray_angel2)
+	int i = 0;
+	while (i < screenWidth)
 	{
-		horizontal_hit = horizontal_intersection(game, ray_angel);
-		vertical_hit =  vertical_intersection(game, ray_angel);
+		horizontal_hit = horizontal_intersection(game, ray_angle);
+		vertical_hit =  vertical_intersection(game, ray_angle);
 		
 		double a = distance(game->player.x, game->player.y, horizontal_hit.x, horizontal_hit.y);
 		double b =  distance(game->player.x, game->player.y, vertical_hit.x, vertical_hit.y);
@@ -91,18 +90,60 @@ void cast_rays(t_game *game)
 
 		if(a < b) 
 		{
-			game->player.x_hit = horizontal_hit.x;
-			game->player.y_hit = horizontal_hit.y;
+			// game->player.x_hit = horizontal_hit.x;
+			// game->player.y_hit = horizontal_hit.y;
+			game->player.distance = a;
 		}
 		else 
 		{
-			game->player.x_hit = vertical_hit.x;
-			game->player.y_hit = vertical_hit.y;
+			// game->player.x_hit = vertical_hit.x;
+			// game->player.y_hit = vertical_hit.y;
+			game->player.distance = b;
 		}
 
+		double line_hight = (tile_size / game->player.distance) * ((screenWidth / 2) / tan(FOV / 2));
+		double start = (screenHeight / 2) - (line_hight / 2);
+		double end =  (screenHeight / 2) + (line_hight / 2);
 
-		draw_line(game->mlx, game->win, game->player.x, game->player.y,
-			game->player.x_hit, game->player.y_hit, 0xff00d4);
-		ray_angel += FOV/50;
+		draw_line(game->mlx, game->win, i, start, i, end, 0xff00d4);
+
+		i++;
+		ray_angle += FOV/screenWidth;
 	}
 }
+
+
+// void cast_rays(t_game *game)
+// {
+//     double ray_angle = game->player.player_angle - (FOV / 2);
+//     double angle_step = FOV / screenWidth;
+
+//     for (int i = 0; i < screenWidth; i++)
+//     {
+//         t_point horizontal_hit = horizontal_intersection(game, ray_angle);
+//         t_point vertical_hit   = vertical_intersection(game, ray_angle);
+
+//         double dist_h = distance(game->player.x, game->player.y, horizontal_hit.x, horizontal_hit.y);
+//         double dist_v = distance(game->player.x, game->player.y, vertical_hit.x, vertical_hit.y);
+
+//         if (dist_h < dist_v)
+//             game->player.distance = dist_h;
+//         else
+//             game->player.distance = dist_v;
+
+//         // 🧠 correct fisheye
+//         double corrected_distance = game->player.distance * cos(ray_angle - game->player.player_angle);
+
+//         // 📏 projection math
+//         double proj_plane = (screenWidth / 2) / tan(FOV / 2);
+//         double line_height = (tile_size / corrected_distance) * proj_plane;
+
+//         double start = (screenHeight / 2) - (line_height / 2);
+//         double end   = (screenHeight / 2) + (line_height / 2);
+
+//         // 🧱 draw vertical wall slice
+//         draw_line(game->mlx, game->win, i, start, i, end, 0xff00d4);
+
+//         ray_angle += angle_step;
+//     }
+// }

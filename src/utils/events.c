@@ -103,19 +103,19 @@ int	press(t_game *game)
 	}
 	if(game->player.left_rot)
 	{
-		game->player.player_angle -= 0.1 * (PI / 180);
+		game->player.player_angle -= speed * (PI / 180);
 		game->player.dir_x =  cos(game->player.player_angle);
 		game->player.dir_y =  sin(game->player.player_angle);
 	}
 	if(game->player.right_rot)
 	{
-		game->player.player_angle += 0.1 * (PI / 180);
+		game->player.player_angle += speed * (PI / 180);
 		game->player.dir_x =  cos(game->player.player_angle);
 		game->player.dir_y =  sin(game->player.player_angle);
 	}
 
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-	draw_square(game, game->player.x, game->player.y, playersize,  0x1026a3);
+	// draw_square(game, game->player.x, game->player.y, playersize,  0x1026a3);
 	cast_rays(game);
 
 

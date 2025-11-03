@@ -13,7 +13,7 @@
 #define W 97
 #define left_rotate 65361
 #define right_rotate 65363
-#define speed 0.2
+#define speed 1
 #define PI 3.14159265358979323846
 #define FOV 60*(PI/180)
 #define screenWidth (mapWidth * tile_size)
@@ -44,8 +44,10 @@ typedef struct s_player {
     int left_rot;
     int right_rot;
 
-	double x_hit; 
-	double y_hit;
+	// double x_hit; 
+	// double y_hit;
+
+	double distance;
 
 	double player_angle;
 

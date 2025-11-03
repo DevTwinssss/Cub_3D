@@ -151,7 +151,7 @@ int main()
     game->player.move_right = 0;
 	game->player.left_rot = 0;
 	game->player.right_rot = 0;
-
+	game->player.distance = 0;
 	game->player.dir_x =  cos(game->player.player_angle);
 	game->player.dir_y =  sin(game->player.player_angle);
 
@@ -162,9 +162,9 @@ int main()
 	game->data = (int *) mlx_get_data_addr(game->img, &bit_per_pixel, &line_len, &endian);
 
 	// draw
-	draw_map(game->data);
+	// draw_map(game->data);
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-	draw_square(game, game->player.x , game->player.y, playersize, 0x1026a3);
+	// draw_square(game, game->player.x , game->player.y, playersize, 0x1026a3);
 
 
 
