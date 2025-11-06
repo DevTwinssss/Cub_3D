@@ -1,12 +1,11 @@
 NAME = cub3d
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 
 SRC := $(wildcard src/*.c)\
-	   $(wildcard src/utils/*.c)
+	   $(wildcard src/raycasting/*.c)
 
 MLX_DIR = minilibx-linux
-
 
 %.o : %.c %.h
 	$(CC) $(CFLAGS) -c $< -o $@
