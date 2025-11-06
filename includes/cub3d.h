@@ -96,7 +96,7 @@ int 	is_press(int keycode, t_game *game);
 int		release(int keycode, t_game *game);
 int		press(t_game *game);
 void	draw_square(t_game *game, int x, int y, int size, int color);
-void	draw_line(void *mlx, void *win, double x0, double y0, double dir_x, double dir_y, int color);
+void	draw_line(t_game *game, double x0, double y0, double dir_x, double dir_y, int color);
 void	cast_rays(t_game *game);
 t_point	horizontal_intersection(t_game *game, double ray_angle);
 t_point	vertical_intersection(t_game *game, double ray_angle);

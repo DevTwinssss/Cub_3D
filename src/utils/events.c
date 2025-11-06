@@ -114,8 +114,8 @@ int	press(t_game *game)
 		game->player.dir_y =  sin(game->player.player_angle);
 	}
 
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 	// draw_square(game, game->player.x, game->player.y, playersize,  0x1026a3);
+	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 	cast_rays(game);
 
 
