@@ -22,10 +22,10 @@
 extern int worldMap[mapHeight][mapWidth];
 
 
+#include <mlx.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <mlx.h>
 #include <math.h>
 #include <X11/keysym.h>
 
@@ -43,9 +43,6 @@ typedef struct s_player {
     int move_right;
     int left_rot;
     int right_rot;
-
-	// double x_hit; 
-	// double y_hit;
 
 	double distance;
 
@@ -71,25 +68,42 @@ typedef struct s_config {
     int ceiling_color;
 } t_config;
 
+
 typedef struct s_map {
     char **grid;
     int width;
     int height;
 } t_map;
 
+
+typedef struct s_texture
+{
+    void    *img;        // the mlx image
+    int     *addr;       // image buffer (int pointer to pixels)
+    int     width;
+    int     height;
+    int     bpp;
+    int     line_len;
+    int     endian;
+}   t_texture;
+
+
 typedef struct s_game {
     t_config config;
     t_map map;
     t_player player;
+	// +++++++++++++++
+	t_texture textures[4]; 
     void *mlx;
     void *win;
-	// +++++++++++++++
 	void *img;
 	int *data;
 
-
-	
 } t_game;
+
+
+
+
 
 // void	draw_map(int *data);
 // void	draw_square(t_game *game, int x, int y, int size, int color);

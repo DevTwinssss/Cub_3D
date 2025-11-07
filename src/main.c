@@ -32,7 +32,6 @@ int main()
 
 	game = initialize(); 
 	
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 
 	// hooks
 	mlx_hook(game->win, 2, 1L<<0 , is_press, game); // press in key  
@@ -46,7 +45,11 @@ int main()
 
 
 /*
-- split functions 
 - add textures 
+	-> Prepare texture structure ~~~~~
+	-> Load your wall textures  : void load_textures(t_game *game) 
+	-> Detect which texture to use for each ray
+	-> Calculate the texture X coordinate (where you hit the wall)
+	-> Prepare to draw the textured column
 - spicifiy textures for (e, n, w, s)
 */
