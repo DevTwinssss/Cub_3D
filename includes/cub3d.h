@@ -10,7 +10,8 @@ typedef struct s_player {
     double plane_y;
 } t_player;
 
-typedef struct s_config {
+typedef struct s_config 
+{
     char *no_path;
     char *so_path;
     char *we_path;
@@ -33,4 +34,20 @@ typedef struct s_game {
     void *win;
 } t_game;
 
+
+
+
+
+
+//parsing 
+void pars_map();
+
+
+
+
+
+
+
+
 #endif
+
