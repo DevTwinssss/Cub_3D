@@ -1,15 +1,26 @@
 #include "../../includes/cub3d.h"
 
-int	valide_name(char *str)
+int open_file(char *str)
 {
-	char	*s1 ;
+    int fd;
 
-	s1 = ft_strrchr(str, '.');
-	if (!s1 || ft_strlen(s1) != ft_strlen(".ber"))
-		return (0);
-	if (ft_strcmp(s1, ".ber") != 0)
-		return (0);
-	return (1);
+    fd = open(str, O_RDONLY);
+    if (fd < 0)
+        return (-1);
+    return (fd);
 }
 
+int valide_name(char *str)
+{
+    char *ext;
+    int fd;
 
+    ext = ft_strrchr(str, '.');
+    if (!ext || ft_strcmp(ext, ".ber") != 0)
+    {
+        printf("Error: invalid file or cannot open.\n");
+        return (-1);
+    }
+    fd = open_file(str);
+    return (fd);
+}

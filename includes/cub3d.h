@@ -1,6 +1,11 @@
 #ifndef CUB3D_H
 #define CUB3D_H
 
+#include <fcntl.h>
+#include <stdio.h>
+#include <unistd.h>
+#include "../get_next_line/get_next_line.h"
+
 typedef struct s_player {
     double x;
     double y;
@@ -34,15 +39,21 @@ typedef struct s_game {
     void *win;
 } t_game;
 
-
+//utils
+char	*ft_strrchr(const char *s, int c);
+size_t	ft_strlen(const char *s);
+int	ft_strcmp(const char *s1, const char *s2);
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
 
 
 
 
 //parsing 
-void pars_map();
-
-
+int parsing(char *str,t_game *game);
+int parse_map(int fd,t_game *game);
+int	valide_name(char *str);
+int open_file(char *str);
+int check_config(char *line, t_game *game);
 
 
 
