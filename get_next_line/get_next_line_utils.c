@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 20:06:04 by nahilal           #+#    #+#             */
-/*   Updated: 2025/12/24 02:27:08 by marvin           ###   ########.fr       */
+/*   Updated: 2025/12/24 14:31:00 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,21 +58,6 @@ char	*ft_strdup(const char *s1)
 	return (ptr);
 }
 
-char	*ft_strchr(const char *s, int c)
-{
-	int	i;
-
-	i = 0;
-	if (s == NULL)
-		return (NULL);
-	while (s[i] != (char)c)
-	{
-		if (s[i] == '\0')
-			return (0);
-		i++;
-	}
-	return ((char *)(s + i));
-}
 
 char	*ft_substr(char const *s, size_t start, size_t len)
 {

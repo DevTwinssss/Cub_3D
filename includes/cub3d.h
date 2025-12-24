@@ -21,6 +21,8 @@ typedef struct s_config
     char *so_path;
     char *we_path;
     char *ea_path;
+    char *floor_color_char;
+    char *ceiling_color_char;
     int floor_color;
     int ceiling_color;
 } t_config;
@@ -44,7 +46,7 @@ char	*ft_strrchr(const char *s, int c);
 size_t	ft_strlen(const char *s);
 int	ft_strcmp(const char *s1, const char *s2);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
-
+char	*ft_strrchr(const char *s, int c);
 
 
 
@@ -54,8 +56,10 @@ int parse_map(int fd,t_game *game);
 int	valide_name(char *str);
 int open_file(char *str);
 int check_config(char *line, t_game *game);
-
-
+void add_line_map(char *line, t_game *game);
+int is_map_line(char *line);
+int check_map(char *line);
+int is_config_line(char *line);
 
 
 

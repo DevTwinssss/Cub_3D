@@ -16,7 +16,7 @@ int valide_name(char *str)
     int fd;
 
     ext = ft_strrchr(str, '.');
-    if (!ext || ft_strcmp(ext, ".ber") != 0)
+    if (!ext || ft_strcmp(ext, ".cub") != 0)
     {
         printf("Error: invalid file or cannot open.\n");
         return (-1);
