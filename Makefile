@@ -5,6 +5,7 @@ CFLAGS = -Werror -Wextra -Wall -g -fsanitize=address
 SRC := 	$(wildcard src/parsing/*.c) \
 		$(wildcard src/utils/*.c) \
 		$(wildcard src/parsing/checks/*.c) \
+		$(wildcard src/garbage_collec/*.c) \
 		$(wildcard get_next_line/*.c) \
 		$(wildcard src/*.c) \
 

@@ -46,9 +46,7 @@ char	*ft_strrchr(const char *s, int c);
 size_t	ft_strlen(const char *s);
 int	ft_strcmp(const char *s1, const char *s2);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
-char	*ft_strrchr(const char *s, int c);
-
-
+char	*ft_strchr(const char *s, int c);
 
 //parsing 
 int parsing(char *str,t_game *game);
@@ -60,10 +58,13 @@ void add_line_map(char *line, t_game *game);
 int is_map_line(char *line);
 void check_map(t_game *game);
 int is_config_line(char *line);
-void print_err(char *err);
+char *ft_strdup(const char *s);
 
-
-
+// Garbage collector functions
+void init_game(t_game *game);
+void free_config(t_config *config);
+void free_map(t_map *map);
+void cleanup_game(t_game *game);
+void print_err(char *err, t_game *game);
 
 #endif
-

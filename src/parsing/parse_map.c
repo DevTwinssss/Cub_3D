@@ -18,7 +18,7 @@ int help_parse_map(char *line, t_game *game, int *map_start, size_t len)
 {
     if(len == 1 || check_space(line) == 1)
             return(0);
-    if (!(*map_start) && is_config_line(line))
+    if (!(*map_start) && is_config_line(line) == 0)
             check_config(line, game);
     else if (is_map_line(line))
     {
@@ -27,9 +27,10 @@ int help_parse_map(char *line, t_game *game, int *map_start, size_t len)
     }
     else if (*map_start)
     {
-        free(line);
+        printf("heere'n\n");
         return (-1);
     }
+   
     return (0);
 }
 
@@ -48,6 +49,7 @@ int parse_map(int fd, t_game *game)
         if(help_parse_map(line, game, &map_start, len) == -1)
         {
             free(line);
+            print_err("Map not valide !",game);
             return (-1);
         }
         if (game->map.width < (int)len)

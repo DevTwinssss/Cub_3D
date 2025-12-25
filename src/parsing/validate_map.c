@@ -37,12 +37,14 @@ int is_map_line(char *line)
 
 int is_config_line(char *line)
 {
-    return (ft_strncmp(line, "NO ", 3) == 0 ||
+    if(ft_strncmp(line, "NO ", 3) == 0 ||
             ft_strncmp(line, "SO ", 3) == 0 ||
             ft_strncmp(line, "WE ", 3) == 0 ||
             ft_strncmp(line, "EA ", 3) == 0 ||
             ft_strncmp(line, "F ", 2) == 0 ||
-            ft_strncmp(line, "C ", 2) == 0);
+            ft_strncmp(line, "C ", 2) == 0)
+        return(0);
+    return(1);
 }
 
 
