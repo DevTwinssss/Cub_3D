@@ -58,8 +58,9 @@ int open_file(char *str);
 int check_config(char *line, t_game *game);
 void add_line_map(char *line, t_game *game);
 int is_map_line(char *line);
-int check_map(char *line);
+void check_map(t_game *game);
 int is_config_line(char *line);
+void print_err(char *err);
 
 
 

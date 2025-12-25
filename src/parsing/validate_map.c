@@ -35,21 +35,6 @@ int is_map_line(char *line)
     return (1);
 }
 
-
-int check_map(char *line)
-{
-    int i;
-
-    i = 0;
-    while(line[i])
-    {
-        if(strchr("01NSEW \n",line[i]))
-            return(0);
-        i++;
-    }
-    return(1);
-}
-
 int is_config_line(char *line)
 {
     return (ft_strncmp(line, "NO ", 3) == 0 ||

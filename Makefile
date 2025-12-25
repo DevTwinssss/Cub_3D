@@ -1,9 +1,10 @@
 NAME = Cub3d
 CC = cc
-CFLAGS = -Werror -Wextra -Wall -g #-fsanitize=address 
+CFLAGS = -Werror -Wextra -Wall -g -fsanitize=address 
 
 SRC := 	$(wildcard src/parsing/*.c) \
 		$(wildcard src/utils/*.c) \
+		$(wildcard src/parsing/checks/*.c) \
 		$(wildcard get_next_line/*.c) \
 		$(wildcard src/*.c) \
 
