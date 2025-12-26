@@ -26,11 +26,7 @@ int help_parse_map(char *line, t_game *game, int *map_start, size_t len)
         add_line_map(line, game);
     }
     else if (*map_start)
-    {
-        printf("heere'n\n");
-        return (-1);
-    }
-   
+        return (-1);   
     return (0);
 }
 
