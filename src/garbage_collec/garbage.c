@@ -6,8 +6,6 @@ void init_game(t_game *game)
     game->config.so_path = NULL;
     game->config.we_path = NULL;
     game->config.ea_path = NULL;
-    game->config.floor_color_char = NULL;
-    game->config.ceiling_color_char = NULL;
     game->config.floor_color = 0;
     game->config.ceiling_color = 0;
     
@@ -41,16 +39,8 @@ void free_config(t_config *config)
         free(config->ea_path);
         config->ea_path = NULL;
     }
-    if (config->floor_color_char)
-    {
-        free(config->floor_color_char);
-        config->floor_color_char = NULL;
-    }
-    if (config->ceiling_color_char)
-    {
-        free(config->ceiling_color_char);
-        config->ceiling_color_char = NULL;
-    }
+        config->floor_color = 0;
+        config->ceiling_color = 0;
 }
 
 void free_map(t_map *map)

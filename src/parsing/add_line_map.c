@@ -18,7 +18,6 @@ void add_line_map(char *line, t_game *game)
         i++;
     }
 
-    // Remove \r and \n from the nd of the line
     cleaned_line = ft_strdup(line);
     len = ft_strlen(cleaned_line);
     while (len > 0 && (cleaned_line[len - 1] == '\n' || cleaned_line[len - 1] == '\r'))

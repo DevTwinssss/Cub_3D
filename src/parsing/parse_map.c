@@ -53,5 +53,6 @@ int parse_map(int fd, t_game *game)
         free(line);
         line = get_next_line(fd);
     }
+    search_player(game);
     return (0);
 }

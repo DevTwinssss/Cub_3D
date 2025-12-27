@@ -3,7 +3,7 @@
 int main(int ac, char **av)
 {
     t_game game;
-    int i;
+   
     
     init_game(&game);
     
@@ -19,12 +19,13 @@ int main(int ac, char **av)
     }
     check_map(&game);
 
-    i = 0;
-    while (game.map.grid && game.map.grid[i])
-    {
-        printf("%s\n", game.map.grid[i]);
-        i++;
-    }  
+    // int i;
+    // i = 0;
+    // while (game.map.grid && game.map.grid[i])
+    // {
+    //     printf("%s\n", game.map.grid[i]);
+    //     i++;
+    // }  
     cleanup_game(&game);
     return (0);
 }

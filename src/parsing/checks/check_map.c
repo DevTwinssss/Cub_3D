@@ -61,15 +61,14 @@ void check_map(t_game *game)
 {
     int i;
 
+    i = 0;
     if (!game || !game->map.grid || game->map.height == 0)
         print_err("Map is empty!", game);
-    i = 0;
     while (i < game->map.height)
     {
         if (i == 0 || i == game->map.height - 1)
             check_wall(game->map.grid[i], game);
         i++;
     }
-    
     check_ground(game);
 }
