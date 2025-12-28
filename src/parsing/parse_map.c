@@ -18,7 +18,7 @@ int help_parse_map(char *line, t_game *game, int *map_start, size_t len)
 {
     if(len == 1 || check_space(line) == 1)
             return(0);
-    if (!(*map_start) && is_config_line(line) == 0)
+    if (!(*map_start) && is_config_line(line, game) == 0)
             check_config(line, game);
     else if (is_map_line(line))
     {
@@ -29,7 +29,14 @@ int help_parse_map(char *line, t_game *game, int *map_start, size_t len)
         return (-1);   
     return (0);
 }
-
+void flag_check(t_game *game)
+{
+    if(game->flag.NO > 1 || game->flag.SO > 1
+        || game->flag.WE > 1 || game->flag.EA > 1 || game->flag.F > 1 || game->flag.C > 1)
+    {
+        print_err("Invalide Element !",game);
+    }
+}
 int parse_map(int fd, t_game *game)
 {
     char *line;
@@ -54,5 +61,6 @@ int parse_map(int fd, t_game *game)
         line = get_next_line(fd);
     }
     search_player(game);
+    flag_check(game);
     return (0);
 }

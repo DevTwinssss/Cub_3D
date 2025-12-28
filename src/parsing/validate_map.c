@@ -51,16 +51,23 @@ int is_map_line(char *line)
     return (1);
 }
 
-int is_config_line(char *line)
+int is_config_line(char *line, t_game *game)
 {
-    if(ft_strncmp(line, "NO ", 3) == 0 ||
-            ft_strncmp(line, "SO ", 3) == 0 ||
-            ft_strncmp(line, "WE ", 3) == 0 ||
-            ft_strncmp(line, "EA ", 3) == 0 ||
-            ft_strncmp(line, "F ", 2) == 0 ||
-            ft_strncmp(line, "C ", 2) == 0)
-        return(0);
-    return(1);
+    if(ft_strncmp(line, "NO ", 3) == 0)
+        game->flag.NO++;
+    else if(ft_strncmp(line, "SO ", 3) == 0)
+        game->flag.SO++;
+    else if(ft_strncmp(line, "EA ", 3) == 0)
+        game->flag.EA++;
+    else if(ft_strncmp(line, "WE ", 3) == 0)
+        game->flag.WE++;
+    else if(ft_strncmp(line, "F ", 2) == 0)
+        game->flag.F++;
+    else if(ft_strncmp(line, "C ", 2) == 0)
+        game->flag.C++;
+    else
+        return(1);
+    return(0);
 }
 
 

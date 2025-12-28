@@ -15,6 +15,15 @@ void init_game(t_game *game)
     
     game->mlx = NULL;
     game->win = NULL;
+
+    game->flag.SO = 0;
+    game->flag.NO = 0;
+    game->flag.EA = 0;
+    game->flag.WE = 0;
+    game->flag.F = 0;
+    game->flag.C = 0;
+
+
 }
 
 void free_config(t_config *config)

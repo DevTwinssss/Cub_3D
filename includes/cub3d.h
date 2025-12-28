@@ -4,6 +4,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <stdbool.h>
 #include "../get_next_line/get_next_line.h"
 
 typedef struct s_player {
@@ -31,10 +32,20 @@ typedef struct s_map {
     int height;
 } t_map;
 
+typedef struct s_conf_dup {
+    int SO;
+    int NO;
+    int EA;
+    int WE;
+    int F;
+    int C;
+}   t_cd;
+
 typedef struct s_game {
     t_config config;
     t_map map;
     t_player player;
+    t_cd flag;
     void *mlx;
     void *win;
 } t_game;
@@ -58,7 +69,7 @@ int check_config(char *line, t_game *game);
 void add_line_map(char *line, t_game *game);
 int is_map_line(char *line);
 void check_map(t_game *game);
-int is_config_line(char *line);
+int is_config_line(char *line, t_game *game);
 char *ft_strdup(const char *s);
 void validate_config(t_game *game);
 int parse_color(char *str);
