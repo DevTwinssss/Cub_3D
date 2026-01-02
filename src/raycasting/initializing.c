@@ -52,9 +52,9 @@ void load_textures(t_game *game)
 t_game *initialize()
 {
 	t_game *game;
-	// int bit_per_pixel;
-	// int line_len;
-	// int endian;
+	int bit_per_pixel;
+	int line_len;
+	int endian;
 	
 	game = (t_game*) malloc(sizeof(t_game));
 	game->player.player_angle = 180 * (PI / 180);
@@ -72,11 +72,12 @@ t_game *initialize()
 	
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, screenWidth, screenHeight, "cub3d");
-	load_textures(game);
-	// game->img = mlx_new_image(game->mlx, screenWidth, screenHeight);
-	// game->data = (int *) mlx_get_data_addr(game->img, &bit_per_pixel, &line_len, &endian);
+	// load_textures(game);
+	game->img = mlx_new_image(game->mlx, screenWidth, screenHeight);
+	game->data = (int *) mlx_get_data_addr(game->img, &bit_per_pixel, &line_len, &endian);
 
-	mlx_put_image_to_window(game->mlx, game->win, game->textures[0].img, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
+	// mlx_put_image_to_window(game->mlx, game->win, game->textures[0].img, 0, 0);
 
 	return(game);
 }
