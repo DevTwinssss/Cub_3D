@@ -117,9 +117,10 @@ t_point	vertical_intersection(t_game *game, double ray_angle);
 double	distance(double x1, double y1, double x2, double y2);
 double	normalize_angle(double angle);
 
-t_game *initialize();
+t_game	*initialize();
 
 
+void	render_background(t_game *game);
 
 
 

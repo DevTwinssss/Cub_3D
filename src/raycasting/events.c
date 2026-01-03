@@ -115,8 +115,9 @@ int	press(t_game *game)
 	}
 
 	// mlx_put_image_to_window(game->mlx, game->win, game->textures[0].img, 0, 0);
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
+	render_background(game);
 	cast_rays(game);
+	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 
 	return (0);
 }
