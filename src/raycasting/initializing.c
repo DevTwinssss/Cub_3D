@@ -26,6 +26,13 @@ void load_textures(t_game *game)
 	}
 }
 
+int close_handler(t_game *game)
+{
+    cleanup_game(game);
+    exit(0);
+    return (0);
+}
+
 void initialize_mlx(t_game *game)
 {
 	int bit_per_pixel;
@@ -37,6 +44,7 @@ void initialize_mlx(t_game *game)
 	game->data = (int *) mlx_get_data_addr(game->img, &bit_per_pixel, &line_len, &endian);
 	mlx_hook(game->win, 2, 1L<<0 , is_press, game); // press in key  
 	mlx_hook(game->win, 3, 1L<<1 , release, game); // up the key
+    mlx_hook(game->win, 17, 0, close_handler, game); // 17 = DestroyNotify, 0  = No specific event mask 
 	mlx_loop_hook(game->mlx, press, game); // loop to continue 	
 }
 
