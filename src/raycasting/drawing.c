@@ -55,7 +55,7 @@
 // 	}
 // }
 
-/* It calculates the memory address of the pixel at (x, y) */
+/* calculates the memory address of the pixel at (x, y) */
 int get_pixel_color(t_texture *tex, int x, int y)
 {
 	if (x < 0 || x >= tex->width || y < 0 || y >= tex->height)
@@ -73,15 +73,12 @@ void render_background(t_game *game)
 	while (y < screenHeight)
 	{
 		x = 0;
-		// Determine color based on whether we are in the top or bottom half
 		if (y < screenHeight / 2)
 			color = game->config.ceiling_color;
 		else
-			color = game->config.floor_color;
-		
+			color = game->config.floor_color;		
 		while (x < screenWidth)
 		{
-			// Write directly to the image buffer
 			game->data[y * screenWidth + x] = color;
 			x++;
 		}
@@ -93,7 +90,7 @@ void cast_rays(t_game *game)
 {
 	t_point	h_hit, v_hit;
 	double	ray_angle = game->player.player_angle - (FOV/2); // Start fov
-	double wallX;
+	double	wallX;
 
 	int	 i = 0;
 

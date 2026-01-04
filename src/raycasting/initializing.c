@@ -1,10 +1,10 @@
 #include "../../includes/cub3d.h"
 
-
 void load_textures(t_game *game)
 {
-	int i = 0;
+	int i;
 
+	i = 0;
 	char *paths[4] = {
         game->config.no_path, 
         game->config.so_path, 
@@ -22,7 +22,6 @@ void load_textures(t_game *game)
 		}
 		game->textures[i].addr = (int *)mlx_get_data_addr(game->textures[i].img, &game->textures[i].bpp, 
 			&game->textures[i].line_len, &game->textures[i].endian);
-		
 		i++;
 	}
 }

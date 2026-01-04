@@ -148,5 +148,14 @@ void	init_graphics(t_game *game);
 void	render_background(t_game *game);
 void	load_textures(t_game *game);
 
+void rotation(t_game *game);
+void up_down(t_game *game);
+void left_right(t_game *game);
+t_point handle_collision(double x, double y, t_game *game);
+void move(double x, double y, t_game *game);
+
+t_point first_ver_intersection(t_game *game, double ray_angle);
+t_point first_hori_intersection(t_game *game, double ray_angle);
+
 
 #endif

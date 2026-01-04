@@ -1,6 +1,6 @@
 NAME = cub3d
 CC = cc
-CFLAGS = -Werror -Wextra -Wall -g -fsanitize=address 
+CFLAGS = -Werror -Wextra -Wall #-g -fsanitize=address 
 
 SRC := 	$(wildcard src/parsing/*.c) \
 		$(wildcard src/utils/*.c) \
@@ -13,7 +13,6 @@ SRC := 	$(wildcard src/parsing/*.c) \
 OBJ = $(SRC:.c=.o)
 
 MLX_DIR = minilibx-linux
-# MLX_PATH = ./minilibx-linux
 
 all: $(NAME)
 
