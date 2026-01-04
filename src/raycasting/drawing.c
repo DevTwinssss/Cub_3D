@@ -89,35 +89,6 @@ void render_background(t_game *game)
 	}
 }
 
-// void cast_rays(t_game *game)
-// {
-// 	t_point horizontal_hit ;
-// 	t_point vertical_hit ;
-// 	int		is_horizonlat;
-
-// 	double ray_angle = game->player.player_angle - (FOV/2); // Start fov
-// 	int i = 0;
-// 	while (i < screenWidth)
-// 	{
-// 		horizontal_hit = horizontal_intersection(game, ray_angle);
-// 		vertical_hit =  vertical_intersection(game, ray_angle);
-// 		double a = distance(game->player.x, game->player.y, horizontal_hit.x, horizontal_hit.y);
-// 		double b =  distance(game->player.x, game->player.y, vertical_hit.x, vertical_hit.y);
-// 		if(a < b)
-// 			{game->player.distance = a; is_horizonlat = 0;}
-// 		else 
-// 			{game->player.distance = b; is_horizonlat = 1;}
-// 		game->player.distance *= cos(ray_angle - game->player.player_angle); // real distance
-// 		double line_height = (tile_size / game->player.distance) * ((screenWidth / 2) / tan(FOV / 2));
-// 		double start = (screenHeight / 2) - (line_height / 2);
-// 		double end =  (screenHeight / 2) + (line_height / 2);
-// 		draw_line(game, i, start, i, end, 0xff00d4);
-// 		i++;
-// 		ray_angle += FOV/screenWidth;
-// 	}
-// }
-
-
 void cast_rays(t_game *game)
 {
 	t_point	h_hit, v_hit;
@@ -133,7 +104,7 @@ void cast_rays(t_game *game)
 	{
 		ray_angle = normalize_angle(ray_angle); // Keep angle between 0 and 2PI
 
-		// --- STEP 1: INTERSECTIONS & DISTANCE ---
+		// --- 1: INTERSECTIONS & DISTANCE ---
 		h_hit = horizontal_intersection(game, ray_angle);
 		v_hit = vertical_intersection(game, ray_angle);
 		
@@ -151,7 +122,7 @@ void cast_rays(t_game *game)
 			is_horizontal = 0;
 		}
 
-		// --- STEP 2: SELECT TEXTURE (N, S, E, W) ---
+		// ---  2: SELECT TEXTURE (N, S, E, W) ---
 		if (is_horizontal)
 		{
 			// If facing DOWN (Angle 0 to PI) -> Hit North Face -> Use NO Texture
@@ -171,13 +142,13 @@ void cast_rays(t_game *game)
 				tex = &game->textures[3]; // EA
 		}
 
-		// --- STEP 3: CALCULATE WALL GEOMETRY ---
+		// ---  3: CALCULATE WALL GEOMETRY ---
 		game->player.distance *= cos(ray_angle - game->player.player_angle); // Fix fisheye
 		double line_height = (tile_size / game->player.distance) * ((screenWidth / 2) / tan(FOV / 2));
 		int start = (screenHeight / 2) - (line_height / 2);
 		int end = (screenHeight / 2) + (line_height / 2);
 
-		// --- STEP 4: CALCULATE TEXTURE X (wallX) --- Translates the position from map to position in texture (which pixel)
+		// ---  4: CALCULATE TEXTURE X (wallX) --- Translates the position from map to position in texture (which pixel)
 		if (is_horizontal)
 			wallX = h_hit.x / tile_size;
 		else
@@ -188,13 +159,17 @@ void cast_rays(t_game *game)
 		// Convert decimal to pixel X on texture (0 to 63)
 		int texX = (int)(wallX * (double)tex->width);
 
-		// // Flip texture if facing South or West to prevent mirroring
+		// if (texX < 0)
+		// 	texX = 0;
+		// if (texX >= tex->width)
+		// 	texX = tex->width - 1;
+		// prevent mirroring
 		// if ((is_horizontal && ray_angle > 0 && ray_angle < PI) || 
 		//	 (!is_horizontal && (ray_angle > PI / 2 && ray_angle < 3 * PI / 2)))
 		//	 texX = tex->width - texX - 1;
 
 
-		// --- STEP 5: DRAW THE STRIP ---
+		// ---  5: DRAW THE STRIP ---
 
 		// Calculate how much to increase texture Y per screen pixel
 		double step = 1.0 * tex->height / line_height;
@@ -221,8 +196,6 @@ void cast_rays(t_game *game)
 			
 			int color = get_pixel_color(tex, texX, texY);
 			
-			// Draw pixel (Assuming you have access to your image data array)
-			// Replace `game->data` with however you access your image buffer
 			game->data[y * screenWidth + i] = color;
 			// tex->addr[y * screenWidth + i] = color; // and put image not pixels 
 			y++;

@@ -29,7 +29,7 @@ t_point vertical_intersection(t_game *game, double ray_angle)
 
 	// find first intersection (y,x)
 	if(ray_angle < (270 * (PI / 180)) && ray_angle > (90 * (PI / 180))) // looking left
-		first_x = floor(game->player.x / tile_size) * tile_size - 0.01; // find y-coordinate of the top border of that row
+		first_x = floor(game->player.x / tile_size) * tile_size - 0.0001; // find y-coordinate of the top border of that row
 	else // looking right
 		first_x = floor(game->player.x / tile_size) * tile_size + tile_size; // find y-coordinate of the top border of that row
 	first_y = tan(ray_angle) * (first_x - game->player.x) + game->player.y;
@@ -70,7 +70,7 @@ t_point horizontal_intersection(t_game *game, double ray_angle)
 	if(ray_angle > 0 && ray_angle < (180 * (PI / 180)))	// find first intersection (y,x)	// looking down 
 		first_y = floor(game->player.y / tile_size) * tile_size + tile_size; // find y-coordinate of the top border of that row
 	else // looking up
-		first_y = floor(game->player.y / tile_size) * tile_size - 0.01; // find y-coordinate of the top border of that row
+		first_y = floor(game->player.y / tile_size) * tile_size - 0.0001; // find y-coordinate of the top border of that row
 	first_x = (first_y - game->player.y) / tan(ray_angle) + game->player.x;
 	if(ray_angle > 0 && ray_angle < (180 * (PI / 180))) // calculate the XA and YA	// looking down
 		ya = tile_size;

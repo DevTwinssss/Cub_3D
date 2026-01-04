@@ -11,7 +11,6 @@ void load_textures(t_game *game)
         game->config.we_path, 
         game->config.ea_path
     };
-
 	while (i < 4)
 	{
 		game->textures[i].img =  mlx_xpm_file_to_image(game->mlx, paths[i], 
@@ -33,10 +32,6 @@ void init_graphics(t_game *game)
 	int bit_per_pixel;
 	int line_len;
 	int endian;
-	
-	// game->player.player_angle = 180 * (PI / 180); // should be comes from parsing 
-	// game->player.x = (screenWidth)/2;
-	// game->player.y = (screenHeight)/2;
 
 	game->player.move_up = 0;
 	game->player.move_down = 0;
@@ -47,10 +42,6 @@ void init_graphics(t_game *game)
 	game->player.distance = 0;
 	game->player.dir_x =  cos(game->player.player_angle);
 	game->player.dir_y =  sin(game->player.player_angle);
-
-	// game->config.ceiling_color = 0x87CEEB; // Sky Blue (R=135, G=206, B=235) // should be comes from parsing
-    // game->config.floor_color   = 0x228B22; // Forest Green (R=34, G=139, B=34)
-
 	game->mlx = mlx_init();
     if (!game->mlx)
     {
@@ -61,7 +52,4 @@ void init_graphics(t_game *game)
 	load_textures(game);
 	game->img = mlx_new_image(game->mlx, screenWidth, screenHeight);
 	game->data = (int *) mlx_get_data_addr(game->img, &bit_per_pixel, &line_len, &endian);
-
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-	// mlx_put_image_to_window(game->mlx, game->win, game->textures[0].img, 0, 0);
 }
