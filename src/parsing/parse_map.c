@@ -37,6 +37,49 @@ void flag_check(t_game *game)
         print_err("Invalide Element !",game);
     }
 }
+
+void make_map_rectangular(t_game *game)
+{
+    int i;
+    int j;
+    int len;
+    char *new_line;
+
+    i = 0;
+    while (i < game->map.height)
+    {
+        len = ft_strlen(game->map.grid[i]);
+        // If the line is shorter than the max width, we need to pad it
+        if (len < game->map.width)
+        {
+            // Allocate new string (width + 1 for null terminator)
+            new_line = malloc(sizeof(char) * (game->map.width + 1));
+            if (!new_line)
+                exit(1); // Handle error properly
+
+            // Copy the existing map data
+            j = 0;
+            while (j < len)
+            {
+                new_line[j] = game->map.grid[i][j];
+                j++;
+            }
+            // Fill the rest with spaces
+            while (j < game->map.width)
+            {
+                new_line[j] = ' '; 
+                j++;
+            }
+            new_line[j] = '\0'; // Null terminate
+
+            // Free the old short line and replace it with the new long line
+            free(game->map.grid[i]);
+            game->map.grid[i] = new_line;
+        }
+        i++;
+    }
+}
+
 int parse_map(int fd, t_game *game)
 {
     char *line;
@@ -60,6 +103,7 @@ int parse_map(int fd, t_game *game)
         free(line);
         line = get_next_line(fd);
     }
+	make_map_rectangular(game); // used here
     search_player(game);
     flag_check(game);
     return (0);

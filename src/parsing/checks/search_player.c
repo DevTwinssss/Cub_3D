@@ -2,42 +2,17 @@
 
 void search_pos(int y,int x, t_game *game)
 {
-    if(game->map.grid[y][x] == 'N')
-    {
-        game->player.x = (double)x + 0.5;
-        game->player.y = (double)y + 0.5;
-        game->player.dir_x = 0.0;
-        game->player.dir_y = -1.0;
-        game->player.plane_x = 0.66;
-        game->player.plane_y = 0.0;
-    }
-    else if(game->map.grid[y][x] == 'S')
-    {
-        game->player.x = (double)x + 0.5;
-        game->player.y = (double)y + 0.5;
-        game->player.dir_x = 0.0;
-        game->player.dir_y = 1.0;
-        game->player.plane_x = -0.66;
-        game->player.plane_y = 0.0;
-    }
-    else if(game->map.grid[y][x] == 'E')
-    {
-        game->player.x = (double)x + 0.5;
-        game->player.y = (double)y + 0.5;
-        game->player.dir_x = 1.0;
-        game->player.dir_y = 0.0;
-        game->player.plane_x = 0.0;
-        game->player.plane_y = 0.66;
-    }
-    else if(game->map.grid[y][x] == 'W')
-    {
-        game->player.x = (double)x + 0.5;
-        game->player.y = (double)y + 0.5;
-        game->player.dir_x = -1.0;
-        game->player.dir_y = 0.0;
-        game->player.plane_x = 0.0;
-        game->player.plane_y = -0.66;
-    }
+	game->player.x = ((double)x * tile_size) + (tile_size / 2.0); // to put the player in the middle 
+    game->player.y = ((double)y * tile_size) + (tile_size / 2.0);
+
+	if (game->map.grid[y][x] == 'N')
+        game->player.player_angle = 3 * PI / 2;
+    else if (game->map.grid[y][x] == 'S')
+        game->player.player_angle = PI / 2;
+    else if (game->map.grid[y][x] == 'E')
+        game->player.player_angle = 0;
+    else if (game->map.grid[y][x] == 'W')
+        game->player.player_angle = PI;
 }
 
 void search_player(t_game *game)

@@ -47,9 +47,9 @@ t_point vertical_intersection(t_game *game, double ray_angle)
 	next_y = first_y;
 
 	// printf("y = %d, x = %d\n", (int)(next_y / tile_size), (int)(next_x / tile_size));
-	while (next_x >= 0 && next_x < mapWidth * tile_size &&
-		next_y >= 0 && next_y < mapHeight * tile_size &&
-		worldMap[(int)(next_y / tile_size)][(int)(next_x / tile_size)] != 1)
+	while (next_x >= 0 && next_x < game->map.width * tile_size &&
+		next_y >= 0 && next_y < game->map.height * tile_size &&
+		game->map.grid[(int)(next_y / tile_size)][(int)(next_x / tile_size)] != '1')
 	{
 		next_x += xa;
 		next_y += ya;
@@ -79,9 +79,9 @@ t_point horizontal_intersection(t_game *game, double ray_angle)
 	xa = ya / tan(ray_angle);
 	next_x = first_x; // find other intersections
 	next_y = first_y;
-    while (next_x >= 0 && next_x < mapWidth * tile_size &&
-		next_y >= 0 && next_y < mapHeight * tile_size &&
-		worldMap[(int)(next_y / tile_size)][(int)(next_x / tile_size)] != 1)
+    while (next_x >= 0 && next_x < game->map.width * tile_size &&
+		next_y >= 0 && next_y < game->map.height * tile_size &&
+		game->map.grid[(int)(next_y / tile_size)][(int)(next_x / tile_size)] != '1')
 	{
 		next_x += xa;
 		next_y += ya;

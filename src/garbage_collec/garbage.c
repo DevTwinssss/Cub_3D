@@ -26,6 +26,7 @@ void init_game(t_game *game)
 
 }
 
+
 void free_config(t_config *config)
 {
     if (config->no_path)
@@ -74,15 +75,25 @@ void free_map(t_map *map)
 
 void cleanup_game(t_game *game)
 {
+	int i = 0;
     free_config(&game->config);
     free_map(&game->map);
     
-    // If you're using MLX, uncomment these when you add MLX
-    // if (game->win && game->mlx)
-    //     mlx_destroy_window(game->mlx, game->win);
-    // if (game->mlx)
-    //     mlx_destroy_display(game->mlx);
-    // if (game->mlx)
-    //     free(game->mlx);
+	if (game->mlx)
+	{
+		if (game->img)
+			mlx_destroy_image(game->mlx, game->img);
+		while (i < 4)
+		{
+			if (game->textures[i].img)
+				mlx_destroy_image(game->mlx, game->textures[i].img);
+			i++;
+		}
+		if (game->win)
+			mlx_destroy_window(game->mlx, game->win);
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+	}
+	free(game);
 }
 

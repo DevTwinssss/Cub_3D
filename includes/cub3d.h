@@ -29,11 +29,8 @@
 #define speed 1
 #define PI 3.14159265358979323846
 #define FOV 60*(PI/180)
-#define screenWidth (mapWidth * tile_size)
+#define screenWidth (mapWidth * tile_size) // should calculat correctly 
 #define screenHeight (mapHeight * tile_size)
-
-extern int worldMap[mapHeight][mapWidth];
-
 
 
 typedef struct s_player {
@@ -156,20 +153,19 @@ void print_err(char *err, t_game *game);
 int 	is_press(int keycode, t_game *game);
 int		release(int keycode, t_game *game);
 int		press(t_game *game);
-void	draw_line(t_game *game, double x0, double y0, double dir_x, double dir_y, int color);
+// void	draw_line(t_game *game, double x0, double y0, double dir_x, double dir_y, int color);
 void	cast_rays(t_game *game);
 t_point	horizontal_intersection(t_game *game, double ray_angle);
 t_point	vertical_intersection(t_game *game, double ray_angle);
 double	distance(double x1, double y1, double x2, double y2);
 double	normalize_angle(double angle);
 
-t_game	*initialize();
-
+void init_graphics(t_game *game);
 
 void	render_background(t_game *game);
 
 
-
+void load_textures(t_game *game);
 
 
 

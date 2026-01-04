@@ -10,22 +10,48 @@ void validate_config(t_game *game)
         print_err("Missing WE texture path", game);
     if (!game->config.ea_path)
         print_err("Missing EA texture path", game);
-    if (!game->config.floor_color)
+    if (!game->config.floor_color) // should check -1 not 0 (0 is black)
         print_err("Missing F color", game);
-    if (!game->config.ceiling_color)
+    if (!game->config.ceiling_color)  // should check -1 not 0 (0 is black)
         print_err("Missing C color", game);
+}
+
+void remove_newline(char *str)
+{
+    int i = 0;
+    while (str[i])
+    {
+        if (str[i] == '\n' || str[i] == '\r')
+        {
+            str[i] = '\0';
+            return;
+        }
+        i++;
+    }
 }
 
 int check_config(char *line, t_game *game)
 {
     if(ft_strncmp(line,"NO ",3) == 0)
+	{
         game->config.no_path = ft_strdup(line + 3);
+		remove_newline(game->config.no_path);
+	}
     else if(ft_strncmp(line,"SO ",3) == 0)
-        game->config.so_path = ft_strdup(line + 3);
+	{
+		game->config.so_path = ft_strdup(line + 3);
+		remove_newline(game->config.so_path);
+	}
     else if(ft_strncmp(line,"WE ",3) == 0)
+	{
         game->config.we_path = ft_strdup(line + 3);    
+		remove_newline(game->config.we_path);
+	}
     else if(ft_strncmp(line,"EA ",3) == 0)
-        game->config.ea_path = ft_strdup(line + 3);
+	{
+		game->config.ea_path = ft_strdup(line + 3);
+		remove_newline(game->config.ea_path);
+	}
     else if (line[0] == 'F')
         game->config.floor_color = parse_color(line + 2);
     else if (line[0] == 'C')

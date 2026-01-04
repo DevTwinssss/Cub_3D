@@ -15,7 +15,10 @@ int is_press(int keycode, t_game *game)
 	if(keycode == right_rotate)
 		game->player.right_rot = 1;
 	if (keycode == 65307) // esc
+	{
+		cleanup_game(game);
 		exit(0);
+	}
 
 	return(0);
 }
@@ -42,20 +45,22 @@ int	press(t_game *game)
 {
 	double x, y;
 	int mapx, mapy;
-
+	// int collision = 10; // distance from wall in pixels
 
 	if (game->player.move_up == 1) //UP
 	{
 		x = game->player.x + cos(game->player.player_angle) * speed;
 		y = game->player.y + sin(game->player.player_angle) * speed;
 
-		mapx = (int) x / tile_size;
-		mapy = (int) y / tile_size;
+		mapx = (int) x / tile_size ;
+		mapy = (int) y / tile_size ;
 
-		if(worldMap[(int)game->player.y / tile_size][mapx] == 0)
+		if (mapx < 0 || mapy < 0)
+    		return -1 ;
+		if(game->map.grid[(int)game->player.y / tile_size][mapx] != '1')
 			game->player.x = x;
 		
-		if(worldMap[mapy][(int)game->player.x / tile_size] == 0)
+		if(game->map.grid[mapy][(int)game->player.x / tile_size] != '1')
 			game->player.y = y;
 	}
 	if (game->player.move_down) //down
@@ -63,13 +68,15 @@ int	press(t_game *game)
 		x = game->player.x - cos(game->player.player_angle) * speed;
 		y = game->player.y - sin(game->player.player_angle) * speed;
 	
-		mapx = (int) x / tile_size;
-		mapy = (int) y / tile_size;
+		mapx = (int) x / tile_size ;
+		mapy = (int) y / tile_size ;
 
-		if(worldMap[(int)game->player.y / tile_size][mapx] == 0)
+		if (mapx < 0 || mapy < 0)
+    		return -1 ;
+		if(game->map.grid[(int)game->player.y / tile_size][mapx] != '1')
 			game->player.x = x ;
 		
-		if(worldMap[mapy][(int)game->player.x / tile_size] == 0)
+		if(game->map.grid[mapy][(int)game->player.x / tile_size] != '1')
 			game->player.y = y ;
 
 	}	
@@ -78,12 +85,14 @@ int	press(t_game *game)
 		x = game->player.x + sin(game->player.player_angle) * speed;
 		y = game->player.y - cos(game->player.player_angle) * speed;
 	
-		mapx = (int) x / tile_size;
-		mapy = (int) y / tile_size;
+		mapx = (int) x / tile_size ;
+		mapy = (int) y / tile_size ;
 
-		if(worldMap[(int)game->player.y / tile_size][mapx] == 0)
+		if (mapx < 0 || mapy < 0)
+    		return -1 ;
+		if(game->map.grid[(int)game->player.y / tile_size][mapx] != '1')
 			game->player.x = x ; 
-		if(worldMap[mapy][(int)game->player.x / tile_size] == 0)
+		if(game->map.grid[mapy][(int)game->player.x / tile_size] != '1')
 			game->player.y = y ;
 
 	}	
@@ -92,12 +101,14 @@ int	press(t_game *game)
 		x = game->player.x - sin(game->player.player_angle) * speed;
 		y = game->player.y + cos(game->player.player_angle) * speed;
 	
-		mapx = (int) x / tile_size;
-		mapy = (int) y / tile_size;
+		mapx = (int) x / tile_size ;
+		mapy = (int) y / tile_size ;
 
-		if(worldMap[(int)game->player.y / tile_size][mapx] == 0)
+		if (mapx < 0 || mapy < 0)
+    		return -1 ;
+		if(game->map.grid[(int)game->player.y / tile_size][mapx] != '1')
 			game->player.x = x ; 
-		if(worldMap[mapy][(int)game->player.x / tile_size] == 0)
+		if(game->map.grid[mapy][(int)game->player.x / tile_size] != '1')
 			game->player.y = y ;
 		
 	}

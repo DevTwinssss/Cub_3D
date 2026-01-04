@@ -3,63 +3,41 @@
 
 void load_textures(t_game *game)
 {
-	game->textures[0].img =  mlx_xpm_file_to_image(game->mlx, "src/textures/img1.xpm", 
-		&game->textures[0].width, &game->textures[0].height);
-	if (!game->textures[0].img)
-	{
-		perror("Error: Failed to load texture");
-		exit(1);
-	}
-	game->textures[0].addr = (int *)mlx_get_data_addr(game->textures[0].img, &game->textures[0].bpp, 
-		&game->textures[0].line_len, &game->textures[0].endian);
+	int i = 0;
 
-	//------------------------
-	game->textures[1].img =  mlx_xpm_file_to_image(game->mlx, "src/textures/img2.xpm", 
-		&game->textures[1].width, &game->textures[1].height);
-	if (!game->textures[1].img)
-	{
-		perror("Error: Failed to load texture");
-		exit(1);
-	}
-	game->textures[1].addr = (int *)mlx_get_data_addr(game->textures[1].img, &game->textures[1].bpp, 
-		&game->textures[1].line_len, &game->textures[1].endian);
+	char *paths[4] = {
+        game->config.no_path, 
+        game->config.so_path, 
+        game->config.we_path, 
+        game->config.ea_path
+    };
 
-	//-------------------------------
-	game->textures[2].img =  mlx_xpm_file_to_image(game->mlx, "src/textures/img3.xpm", 
-		&game->textures[2].width, &game->textures[2].height);
-	if (!game->textures[2].img)
+	while (i < 4)
 	{
-		perror("Error: Failed to load texture");
-		exit(1);
+		game->textures[i].img =  mlx_xpm_file_to_image(game->mlx, paths[i], 
+			&game->textures[i].width, &game->textures[i].height);
+		if (!game->textures[i].img)
+		{
+			perror("Error: Failed to load texture");
+			exit(1);
+		}
+		game->textures[i].addr = (int *)mlx_get_data_addr(game->textures[i].img, &game->textures[i].bpp, 
+			&game->textures[i].line_len, &game->textures[i].endian);
+		
+		i++;
 	}
-	game->textures[2].addr = (int *)mlx_get_data_addr(game->textures[2].img, &game->textures[2].bpp, 
-		&game->textures[2].line_len, &game->textures[2].endian);
-
-	//--------------------------------
-	game->textures[3].img =  mlx_xpm_file_to_image(game->mlx, "src/textures/img4.xpm", 
-		&game->textures[3].width, &game->textures[3].height);
-	if (!game->textures[3].img)
-	{
-		perror("Error: Failed to load texture");
-		exit(1);
-	}
-	game->textures[3].addr = (int *)mlx_get_data_addr(game->textures[3].img, &game->textures[3].bpp, 
-		&game->textures[3].line_len, &game->textures[3].endian);
-
 }
 
-
-t_game *initialize()
+void init_graphics(t_game *game)
 {
-	t_game *game;
 	int bit_per_pixel;
 	int line_len;
 	int endian;
 	
-	game = (t_game*) malloc(sizeof(t_game));
-	game->player.player_angle = 180 * (PI / 180);
-	game->player.x = (screenWidth)/2;
-	game->player.y = (screenHeight)/2;
+	// game->player.player_angle = 180 * (PI / 180); // should be comes from parsing 
+	// game->player.x = (screenWidth)/2;
+	// game->player.y = (screenHeight)/2;
+
 	game->player.move_up = 0;
 	game->player.move_down = 0;
 	game->player.move_left = 0;
@@ -69,11 +47,16 @@ t_game *initialize()
 	game->player.distance = 0;
 	game->player.dir_x =  cos(game->player.player_angle);
 	game->player.dir_y =  sin(game->player.player_angle);
-	
-	game->config.ceiling_color = 0x87CEEB; // Sky Blue (R=135, G=206, B=235)
-    game->config.floor_color   = 0x228B22; // Forest Green (R=34, G=139, B=34)
+
+	// game->config.ceiling_color = 0x87CEEB; // Sky Blue (R=135, G=206, B=235) // should be comes from parsing
+    // game->config.floor_color   = 0x228B22; // Forest Green (R=34, G=139, B=34)
 
 	game->mlx = mlx_init();
+    if (!game->mlx)
+    {
+        printf("Error\nMLX init failed\n");
+        exit(1);
+    }
 	game->win = mlx_new_window(game->mlx, screenWidth, screenHeight, "cub3d");
 	load_textures(game);
 	game->img = mlx_new_image(game->mlx, screenWidth, screenHeight);
@@ -81,6 +64,4 @@ t_game *initialize()
 
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 	// mlx_put_image_to_window(game->mlx, game->win, game->textures[0].img, 0, 0);
-
-	return(game);
 }
