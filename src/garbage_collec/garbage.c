@@ -6,8 +6,8 @@ void init_game(t_game *game)
     game->config.so_path = NULL;
     game->config.we_path = NULL;
     game->config.ea_path = NULL;
-    game->config.floor_color = 0;
-    game->config.ceiling_color = 0;
+    game->config.floor_color = -1;
+    game->config.ceiling_color = -1;
     
     game->map.grid = NULL;
     game->map.width = 0;

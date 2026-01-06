@@ -53,9 +53,9 @@ int check_config(char *line, t_game *game)
 		remove_newline(game->config.ea_path);
 	}
     else if (line[0] == 'F')
-        game->config.floor_color = parse_color(line + 2);
+        game->config.floor_color = parse_color(line + 2 ,game);
     else if (line[0] == 'C')
-        game->config.ceiling_color = parse_color(line + 2);
+        game->config.ceiling_color = parse_color(line + 2,game);
     else
         return (0);
     return (1);

@@ -111,6 +111,7 @@ int	ft_strcmp(const char *s1, const char *s2);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strchr(const char *s, int c);
 int ft_atoi(const char *str);
+char	**ft_split(char const *s, char c);
 
 //parsing 
 int parsing(char *str,t_game *game);
@@ -124,7 +125,7 @@ void check_map(t_game *game);
 int is_config_line(char *line, t_game *game);
 char *ft_strdup(const char *s);
 void validate_config(t_game *game);
-int parse_color(char *str);
+int parse_color(char *str, t_game *game);
 void search_player(t_game *game);
 
 // Garbage collector functions
