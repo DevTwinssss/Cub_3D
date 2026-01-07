@@ -6,7 +6,7 @@
 /*   By: hind <hind@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:55:15 by hind              #+#    #+#             */
-/*   Updated: 2026/01/07 17:39:40 by hind             ###   ########.fr       */
+/*   Updated: 2026/01/07 19:47:59 by hind             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	load_textures(t_game *game)
 		if (!game->textures[i].img)
 		{
 			perror("Error: Failed to load texture");
+			cleanup_game(game);
 			exit(1);
 		}
 		game->textures[i].addr = (int *)mlx_get_data_addr(game->textures[i].img,
@@ -76,6 +77,7 @@ void	init_graphics(t_game *game)
 	if (!game->mlx)
 	{
 		printf("Error MLX init failed\n");
+		cleanup_game(game);
 		exit(1);
 	}
 	load_textures(game);
