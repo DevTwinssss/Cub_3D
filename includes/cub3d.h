@@ -90,12 +90,19 @@ typedef struct s_texture
     int     endian;
 }   t_texture;
 
+typedef struct s_wall
+{
+    double  line_height;
+    int     start;
+    int     end;
+}   t_wall;
 
 typedef struct s_game {
     t_config config;
     t_map map;
     t_player player;
     t_cd flag;
+	t_wall wall;
 	t_texture textures[4]; 
     void *mlx;
     void *win;

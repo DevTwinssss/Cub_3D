@@ -62,7 +62,7 @@ void init_graphics(t_game *game)
 	game->mlx = mlx_init();
     if (!game->mlx)
     {
-        printf("Error\nMLX init failed\n");
+        printf("Error MLX init failed\n");
         exit(1);
     }
 	load_textures(game);

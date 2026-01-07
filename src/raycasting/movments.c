@@ -20,13 +20,13 @@ t_point handle_collision(double x, double y, t_game *game)
 void move(double x, double y, t_game *game)
 {
 	t_point check;
-	int mapx;
+	int	mapx;
 	int mapy;
 
 	check = handle_collision(x, y, game);
 	mapx = (int) check.x;
 	mapy = (int) check.y;
-	if (mapx < 0 || mapy < 0)
+	if (mapx < 0 || mapy < 0) // prevent reading invalid memory in array [-1]
 		return ;
 	if(game->map.grid[(int)game->player.y / tile_size][mapx] != '1')
 		game->player.x = x ;
