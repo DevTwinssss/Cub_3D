@@ -7,7 +7,6 @@ in -> validate_map.c
 	
 	[ should check -1 not 0 (0 is black)]
 [nada][change the config flor and ceilling's value into -1]
-
 --------------------------------------------------------------------
 -> parse_rgb.c [should check the range (0-255)] [Done] [nada]
 

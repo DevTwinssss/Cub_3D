@@ -63,7 +63,6 @@ int parse_color(char *str, t_game *game)
     int i;
     i = 0;
 
-    // check_split(str);
     check_rgb_syntax(str,game);
     r = ft_atoi(str + i);
     if(r < 0 || r > 255)
