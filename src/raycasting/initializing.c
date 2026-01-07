@@ -6,7 +6,7 @@
 /*   By: hind <hind@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:55:15 by hind              #+#    #+#             */
-/*   Updated: 2026/01/07 19:47:59 by hind             ###   ########.fr       */
+/*   Updated: 2026/01/07 20:25:36 by hind             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	initialize_mlx(t_game *game)
 			&line_len, &endian);
 	mlx_hook(game->win, 2, 1L << 0, is_press, game);
 	mlx_hook(game->win, 3, 1L << 1, release, game);
+	mlx_hook(game->win, 6, 1L << 6, mouse_move, game);
 	mlx_hook(game->win, 17, 0, close_handler, game);
 	mlx_loop_hook(game->mlx, press, game);
 }

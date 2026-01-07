@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nahilal <nahilal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hind <hind@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 17:33:01 by hind              #+#    #+#             */
-/*   Updated: 2026/01/07 18:20:21 by nahilal          ###   ########.fr       */
+/*   Updated: 2026/01/07 20:22:12 by hind             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ void	print_err(char *err, t_game *game);
 // raycasting
 int		is_press(int keycode, t_game *game);
 int		release(int keycode, t_game *game);
+int		mouse_move(int x, int y, t_game *game);
 int		press(t_game *game);
 void	cast_rays(t_game *game);
 t_point	horizontal_intersection(t_game *game, double ray_angle);
