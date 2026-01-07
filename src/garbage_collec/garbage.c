@@ -14,23 +14,23 @@
 
 void	init_game(t_game *game)
 {
-    game->config.no_path = NULL;
-    game->config.so_path = NULL;
-    game->config.we_path = NULL;
-    game->config.ea_path = NULL;
-    game->config.floor_color = -1;
-    game->config.ceiling_color = -1;
-    game->map.grid = NULL;
-    game->map.width = 0;
-    game->map.height = 0;
-    game->mlx = NULL;
-    game->win = NULL;
-    game->flag.so = 0;
-    game->flag.no = 0;
-    game->flag.ea = 0;
-    game->flag.we = 0;
-    game->flag.f = 0;
-    game->flag.c = 0;
+	game->config.no_path = NULL;
+	game->config.so_path = NULL;
+	game->config.we_path = NULL;
+	game->config.ea_path = NULL;
+	game->config.floor_color = -1;
+	game->config.ceiling_color = -1;
+	game->map.grid = NULL;
+	game->map.width = 0;
+	game->map.height = 0;
+	game->mlx = NULL;
+	game->win = NULL;
+	game->flag.so = 0;
+	game->flag.no = 0;
+	game->flag.ea = 0;
+	game->flag.we = 0;
+	game->flag.f = 0;
+	game->flag.c = 0;
 }
 
 void	free_config(t_config *config)

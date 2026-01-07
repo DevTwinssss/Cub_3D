@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hind <hind@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nahilal <nahilal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:13:11 by hind              #+#    #+#             */
-/*   Updated: 2026/01/07 17:39:55 by hind             ###   ########.fr       */
+/*   Updated: 2026/01/07 18:27:13 by nahilal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ void	cast_rays(t_game *game)
 		h_hit = horizontal_intersection(game, ray_angle);
 		v_hit = vertical_intersection(game, ray_angle);
 		is_horizontal = calc_player_dis(game, h_hit, v_hit, ray_angle);
-		game->wall.line_height = (TILE_SIZE / game->player.distance) * \
-								((SCREENWIDTH / 2) / tan(FOV / 2));
+		game->wall.line_height = (TILE_SIZE / game->player.distance)
+			* ((SCREENWIDTH / 2) / tan(FOV / 2));
 		game->wall.start = (SCREENHEIGHT / 2) - (game->wall.line_height / 2);
 		game->wall.end = (SCREENHEIGHT / 2) + (game->wall.line_height / 2);
 		tex = select_texture(game, ray_angle, is_horizontal);

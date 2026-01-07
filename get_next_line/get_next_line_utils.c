@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nahilal <nahilal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 20:06:04 by nahilal           #+#    #+#             */
-/*   Updated: 2025/12/24 14:31:00 by marvin           ###   ########.fr       */
+/*   Updated: 2026/01/07 18:23:31 by nahilal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ char	*ft_strdup(const char *s1)
 	ptr[i] = '\0';
 	return (ptr);
 }
-
 
 char	*ft_substr(char const *s, size_t start, size_t len)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersections.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hind <hind@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nahilal <nahilal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 17:01:58 by hind              #+#    #+#             */
-/*   Updated: 2026/01/07 17:39:55 by hind             ###   ########.fr       */
+/*   Updated: 2026/01/07 18:27:47 by nahilal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ t_point	check_next_inters(t_game *game, t_point firstInte, double xa, double ya)
 
 	next_hit.x = firstInte.x;
 	next_hit.y = firstInte.y;
-	while (next_hit.x >= 0 && next_hit.x < (game->map.width * TILE_SIZE) && \
-		next_hit.y >= 0 && next_hit.y < (game->map.height * TILE_SIZE) && \
-		game->map.grid[(int)(next_hit.y / TILE_SIZE)] \
+	while (next_hit.x >= 0 && next_hit.x < (game->map.width * TILE_SIZE)
+		&& next_hit.y >= 0 && next_hit.y < (game->map.height * TILE_SIZE)
+		&& game->map.grid[(int)(next_hit.y / TILE_SIZE)]
 						[(int)(next_hit.x / TILE_SIZE)] != '1')
 	{
 		next_hit.x += xa;

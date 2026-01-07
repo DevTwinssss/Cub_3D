@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendring.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hind <hind@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nahilal <nahilal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:50:02 by hind              #+#    #+#             */
-/*   Updated: 2026/01/07 17:39:40 by hind             ###   ########.fr       */
+/*   Updated: 2026/01/07 18:28:52 by nahilal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	draw_ver_lines(t_texture *tex, t_game *game, int texture_x, int i)
 	step = tex->height / game->wall.line_height;
 	if (game->wall.start < 0)
 		game->wall.start = 0;
-	texture_pos = (game->wall.start - (SCREENHEIGHT / 2 - \
-		game->wall.line_height / 2)) * step;
+	texture_pos = (game->wall.start
+			- (SCREENHEIGHT / 2 - game->wall.line_height / 2)) * step;
 	if (game->wall.end >= SCREENHEIGHT)
 		game->wall.end = SCREENHEIGHT;
 	while (game->wall.start < game->wall.end)
