@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nahilal <nahilal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hind <hind@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 17:03:05 by nahilal           #+#    #+#             */
-/*   Updated: 2026/01/07 18:21:57 by nahilal          ###   ########.fr       */
+/*   Updated: 2026/01/07 18:23:20 by hind             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,18 @@ int	check_space(char *line)
 
 int	help_parse_map(char *line, t_game *game, int *map_start, size_t len)
 {
-    if (len == 1 || check_space(line) == 1)
-            return (0);
-    if (!(*map_start) && is_config_line(line, game) == 0)
-            check_config(line, game);
-    else if (is_map_line(line))
-    {
-        *map_start = 1;
-        add_line_map(line, game);
-    }
-    else if (*map_start)
-        return (-1);   
-    return (0);
+	if (len == 1 || check_space(line) == 1)
+		return (0);
+	if (!(*map_start) && is_config_line(line, game) == 0)
+		check_config(line, game);
+	else if (is_map_line(line))
+	{
+		*map_start = 1;
+		add_line_map(line, game);
+	}
+	else if (*map_start)
+		return (-1);
+	return (0);
 }
 
 void	flag_check(t_game *game)

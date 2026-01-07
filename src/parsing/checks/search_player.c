@@ -15,8 +15,7 @@
 void	search_pos(int y, int x, t_game *game)
 {
 	game->player.x = ((double)x * TILE_SIZE) + (TILE_SIZE / 2.0);
-    game->player.y = ((double)y * TILE_SIZE) + (TILE_SIZE / 2.0);
-
+	game->player.y = ((double)y * TILE_SIZE) + (TILE_SIZE / 2.0);
 	if (game->map.grid[y][x] == 'N')
 		game->player.player_angle = 3 * PI / 2;
 	else if (game->map.grid[y][x] == 'S')
