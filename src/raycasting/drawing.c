@@ -6,7 +6,7 @@
 /*   By: hind <hind@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:13:11 by hind              #+#    #+#             */
-/*   Updated: 2026/01/07 16:49:54 by hind             ###   ########.fr       */
+/*   Updated: 2026/01/07 17:39:55 by hind             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ int	get_texture_x(t_point h_hit, t_point v_hit, int is_horiz, t_texture *tex)
 	int		texture_x;
 
 	if (is_horiz)
-		hit_wall_position = h_hit.x / tile_size;
+		hit_wall_position = h_hit.x / TILE_SIZE;
 	else
-		hit_wall_position = v_hit.y / tile_size;
+		hit_wall_position = v_hit.y / TILE_SIZE;
 	hit_wall_position -= floor(hit_wall_position);
 	texture_x = (int)(hit_wall_position * (double)tex->width);
 	return (texture_x);
@@ -86,20 +86,20 @@ void	cast_rays(t_game *game)
 	int (is_horizontal), (i), (texture_x);
 	i = 0;
 	ray_angle = game->player.player_angle - (FOV / 2);
-	while (i < screenWidth)
+	while (i < SCREENWIDTH)
 	{
 		ray_angle = normalize_angle(ray_angle);
 		h_hit = horizontal_intersection(game, ray_angle);
 		v_hit = vertical_intersection(game, ray_angle);
 		is_horizontal = calc_player_dis(game, h_hit, v_hit, ray_angle);
-		game->wall.line_height = (tile_size / game->player.distance) * \
-								((screenWidth / 2) / tan(FOV / 2));
-		game->wall.start = (screenHeight / 2) - (game->wall.line_height / 2);
-		game->wall.end = (screenHeight / 2) + (game->wall.line_height / 2);
+		game->wall.line_height = (TILE_SIZE / game->player.distance) * \
+								((SCREENWIDTH / 2) / tan(FOV / 2));
+		game->wall.start = (SCREENHEIGHT / 2) - (game->wall.line_height / 2);
+		game->wall.end = (SCREENHEIGHT / 2) + (game->wall.line_height / 2);
 		tex = select_texture(game, ray_angle, is_horizontal);
 		texture_x = get_texture_x(h_hit, v_hit, is_horizontal, tex);
 		draw_ver_lines(tex, game, texture_x, i);
 		i++;
-		ray_angle += FOV / screenWidth;
+		ray_angle += FOV / SCREENWIDTH;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: hind <hind@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 17:01:58 by hind              #+#    #+#             */
-/*   Updated: 2026/01/07 17:19:13 by hind             ###   ########.fr       */
+/*   Updated: 2026/01/07 17:39:55 by hind             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ t_point	check_next_inters(t_game *game, t_point firstInte, double xa, double ya)
 
 	next_hit.x = firstInte.x;
 	next_hit.y = firstInte.y;
-	while (next_hit.x >= 0 && next_hit.x < (game->map.width * tile_size) && \
-		next_hit.y >= 0 && next_hit.y < (game->map.height * tile_size) && \
-		game->map.grid[(int)(next_hit.y / tile_size)] \
-						[(int)(next_hit.x / tile_size)] != '1')
+	while (next_hit.x >= 0 && next_hit.x < (game->map.width * TILE_SIZE) && \
+		next_hit.y >= 0 && next_hit.y < (game->map.height * TILE_SIZE) && \
+		game->map.grid[(int)(next_hit.y / TILE_SIZE)] \
+						[(int)(next_hit.x / TILE_SIZE)] != '1')
 	{
 		next_hit.x += xa;
 		next_hit.y += ya;
@@ -49,9 +49,9 @@ t_point	vertical_intersection(t_game *game, double ray_angle)
 	double (xa), (ya);
 	first_inters = first_ver_intersection(game, ray_angle);
 	if (ray_angle < (270 * (PI / 180)) && ray_angle > (90 * (PI / 180)))
-		xa = -tile_size;
+		xa = -TILE_SIZE;
 	else
-		xa = tile_size;
+		xa = TILE_SIZE;
 	ya = xa * tan(ray_angle);
 	return (check_next_inters(game, first_inters, xa, ya));
 }
@@ -63,9 +63,9 @@ t_point	horizontal_intersection(t_game *game, double ray_angle)
 	double (xa), (ya);
 	first_inters = first_hori_intersection(game, ray_angle);
 	if (ray_angle > 0 && ray_angle < (180 * (PI / 180)))
-		ya = tile_size;
+		ya = TILE_SIZE;
 	else
-		ya = -tile_size;
+		ya = -TILE_SIZE;
 	xa = ya / tan(ray_angle);
 	return (check_next_inters(game, first_inters, xa, ya));
 }

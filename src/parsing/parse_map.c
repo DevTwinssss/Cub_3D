@@ -31,8 +31,8 @@ int help_parse_map(char *line, t_game *game, int *map_start, size_t len)
 }
 void flag_check(t_game *game)
 {
-    if(game->flag.NO > 1 || game->flag.SO > 1
-        || game->flag.WE > 1 || game->flag.EA > 1 || game->flag.F > 1 || game->flag.C > 1)
+    if(game->flag.no > 1 || game->flag.so > 1
+        || game->flag.we > 1 || game->flag.ea > 1 || game->flag.f > 1 || game->flag.c > 1)
     {
         print_err("Invalide Element !",game);
     }

@@ -6,7 +6,7 @@
 /*   By: hind <hind@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:55:15 by hind              #+#    #+#             */
-/*   Updated: 2026/01/07 17:01:17 by hind             ###   ########.fr       */
+/*   Updated: 2026/01/07 17:39:40 by hind             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ void	initialize_mlx(t_game *game)
 	int	line_len;
 	int	endian;
 
-	game->win = mlx_new_window(game->mlx, screenWidth, screenHeight, "cub3d");
-	game->img = mlx_new_image(game->mlx, screenWidth, screenHeight);
+	game->win = mlx_new_window(game->mlx, SCREENWIDTH, SCREENHEIGHT, "cub3d");
+	game->img = mlx_new_image(game->mlx, SCREENWIDTH, SCREENHEIGHT);
 	game->data = (int *) mlx_get_data_addr(game->img, &bit_per_pixel,
 			&line_len, &endian);
 	mlx_hook(game->win, 2, 1L << 0, is_press, game);

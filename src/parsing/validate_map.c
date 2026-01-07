@@ -80,17 +80,17 @@ int is_map_line(char *line)
 int is_config_line(char *line, t_game *game)
 {
     if(ft_strncmp(line, "NO ", 3) == 0)
-        game->flag.NO++;
+        game->flag.no++;
     else if(ft_strncmp(line, "SO ", 3) == 0)
-        game->flag.SO++;
+        game->flag.so++;
     else if(ft_strncmp(line, "EA ", 3) == 0)
-        game->flag.EA++;
+        game->flag.ea++;
     else if(ft_strncmp(line, "WE ", 3) == 0)
-        game->flag.WE++;
+        game->flag.we++;
     else if(ft_strncmp(line, "F ", 2) == 0)
-        game->flag.F++;
+        game->flag.f++;
     else if(ft_strncmp(line, "C ", 2) == 0)
-        game->flag.C++;
+        game->flag.c++;
     else
         return(1);
     return(0);

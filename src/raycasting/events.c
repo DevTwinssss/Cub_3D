@@ -6,7 +6,7 @@
 /*   By: hind <hind@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:50:38 by hind              #+#    #+#             */
-/*   Updated: 2026/01/07 16:52:15 by hind             ###   ########.fr       */
+/*   Updated: 2026/01/07 17:35:31 by hind             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int	is_press(int keycode, t_game *game)
 		game->player.move_left = 1;
 	if (keycode == E)
 		game->player.move_right = 1;
-	if (keycode == left_rotate)
+	if (keycode == LEFT_ROTATE)
 		game->player.left_rot = 1;
-	if (keycode == right_rotate)
+	if (keycode == RIGHT_ROTATE)
 		game->player.right_rot = 1;
 	if (keycode == ESC)
 	{
@@ -44,9 +44,9 @@ int	release(int keycode, t_game *game)
 		game->player.move_left = 0;
 	if (keycode == E)
 		game->player.move_right = 0;
-	if (keycode == left_rotate)
+	if (keycode == LEFT_ROTATE)
 		game->player.left_rot = 0;
-	if (keycode == right_rotate)
+	if (keycode == RIGHT_ROTATE)
 		game->player.right_rot = 0;
 	return (0);
 }
