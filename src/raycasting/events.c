@@ -1,42 +1,54 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   events.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hind <hind@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/07 16:50:38 by hind              #+#    #+#             */
+/*   Updated: 2026/01/07 16:52:15 by hind             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
-int is_press(int keycode, t_game *game)
+int	is_press(int keycode, t_game *game)
 {
-	if (keycode == N) //UP
+	if (keycode == N)
 		game->player.move_up = 1;
-	if (keycode == S) //down
+	if (keycode == S)
 		game->player.move_down = 1;
-	if (keycode == W) // left
+	if (keycode == W)
 		game->player.move_left = 1;
-	if (keycode == E) // right
+	if (keycode == E)
 		game->player.move_right = 1;
-	if(keycode == left_rotate)
+	if (keycode == left_rotate)
 		game->player.left_rot = 1;
-	if(keycode == right_rotate)
+	if (keycode == right_rotate)
 		game->player.right_rot = 1;
-	if (keycode == 65307) // esc
+	if (keycode == ESC)
 	{
 		cleanup_game(game);
 		exit(0);
 	}
-	return(0);
+	return (0);
 }
 
-int release(int keycode, t_game *game)
+int	release(int keycode, t_game *game)
 {
-	if (keycode == N) //UP
+	if (keycode == N)
 		game->player.move_up = 0;
-	if (keycode == S) //down
+	if (keycode == S)
 		game->player.move_down = 0;
-	if (keycode == W) // left
+	if (keycode == W)
 		game->player.move_left = 0;
-	if (keycode == E) // right
+	if (keycode == E)
 		game->player.move_right = 0;
-	if(keycode == left_rotate)
+	if (keycode == left_rotate)
 		game->player.left_rot = 0;
-	if(keycode == right_rotate)
+	if (keycode == right_rotate)
 		game->player.right_rot = 0;
-	return(0);
+	return (0);
 }
 
 int	press(t_game *game)
@@ -47,6 +59,5 @@ int	press(t_game *game)
 	render_background(game);
 	cast_rays(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-
 	return (0);
 }

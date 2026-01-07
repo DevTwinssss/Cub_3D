@@ -20,6 +20,7 @@
 #define S 115
 #define E 100
 #define W 97
+#define ESC 65307
 #define left_rotate 65361
 #define right_rotate 65363
 #define speed 3
@@ -164,6 +165,10 @@ void move(double x, double y, t_game *game);
 
 t_point first_ver_intersection(t_game *game, double ray_angle);
 t_point first_hori_intersection(t_game *game, double ray_angle);
+
+void	draw_ver_lines(t_texture *tex, t_game *game, int texture_x, int i);
+void	render_background(t_game *game);
+int	get_pixel_color(t_texture *tex, int tex_x, int tex_y);
 
 
 #endif
