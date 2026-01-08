@@ -11,10 +11,10 @@
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
 int	main(int ac, char **av)
 {
 	t_game	*game;
-	// int		i;
 
 	if (ac != 2)
 	{
@@ -29,15 +29,11 @@ int	main(int ac, char **av)
 	}
 	init_game(game);
 	if (parsing(av[1], game) == -1)
-	{
-		cleanup_game(game);
-		return (1);
-	}
-	// fill_map(game);
+		return (cleanup_game(game), 1);
 	check_map(game);
+	make_map_rectangular(game);
 	init_graphics(game);
 	mlx_loop(game->mlx);
 	cleanup_game(game);
 	return (0);
 }
-

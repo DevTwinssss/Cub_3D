@@ -6,7 +6,7 @@
 /*   By: nahilal <nahilal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 17:33:01 by hind              #+#    #+#             */
-/*   Updated: 2026/01/07 23:41:26 by nahilal          ###   ########.fr       */
+/*   Updated: 2026/01/08 01:37:12 by nahilal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,6 @@ void	validate_config(t_game *game);
 int		parse_color(char *str, t_game *game);
 void	search_player(t_game *game);
 void	make_map_rectangular(t_game *game);
-void	fill_map(t_game *game);
 
 // Garbage collector functions
 void	init_game(t_game *game);

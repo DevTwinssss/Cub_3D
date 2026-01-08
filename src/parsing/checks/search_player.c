@@ -28,10 +28,7 @@ void	search_pos(int y, int x, t_game *game)
 
 void	search_player(t_game *game)
 {
-	int	x;
-	int	y;
-	int	player_count;
-
+	int (x), (y), (player_count);
 	y = 0;
 	player_count = 0;
 	while (game->map.grid && game->map.grid[y])
