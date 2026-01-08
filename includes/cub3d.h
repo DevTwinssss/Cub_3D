@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nahilal <nahilal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: himousta <himousta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 17:33:01 by hind              #+#    #+#             */
-/*   Updated: 2026/01/08 01:48:16 by nahilal          ###   ########.fr       */
+/*   Updated: 2026/01/08 01:56:43 by himousta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@
 # define ESC 65307
 # define LEFT_ROTATE 65361
 # define RIGHT_ROTATE 65363
-# define SPEED 3
+# define SPEED 5
 # define PI 3.14159265358979323846
 # define FOV 1.04719755 // 60 degrees in radians (60 * (PI/180))
-# define SCREENWIDTH 1280
-# define SCREENHEIGHT 740
+# define SCREENWIDTH 2560
+# define SCREENHEIGHT 1600
 # define TILE_SIZE 64 
 
 typedef struct s_player
