@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hind <hind@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nahilal <nahilal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:50:38 by hind              #+#    #+#             */
-/*   Updated: 2026/01/07 20:50:07 by hind             ###   ########.fr       */
+/*   Updated: 2026/01/08 01:50:17 by nahilal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	mouse_move(int x, int y, t_game *game)
 
 	(void)y;
 	diff_center_x = x - (SCREENWIDTH / 2);
-	game->player.player_angle += diff_center_x * 0.0001;
+	game->player.player_angle += diff_center_x * 0.001;
 	game->player.dir_x = cos(game->player.player_angle);
 	game->player.dir_y = sin(game->player.player_angle);
 	mlx_mouse_move(game->mlx, game->win, SCREENWIDTH / 2, SCREENHEIGHT / 2);

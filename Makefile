@@ -1,6 +1,7 @@
 NAME = cub3d
 CC = cc
-CFLAGS = -Werror -Wextra -Wall #-g -fsanitize=address 
+CFLAGS = -Werror -Wextra -Wall
+HEADER = includes/cub3d.h
 
 SRC := 	$(wildcard src/parsing/*.c) \
 		$(wildcard src/utils/*.c) \
@@ -19,8 +20,7 @@ all: $(NAME)
 $(NAME): $(OBJ) 
 	$(CC) $(CFLAGS) $(OBJ) -I$(MLX_DIR) -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz -o $(NAME)
 
-# depand on header file
-%.o: %.c 
+%.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) -I$(MLX_DIR) -c $< -o $@
 
 clean:
