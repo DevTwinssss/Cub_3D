@@ -30,10 +30,10 @@ void	search_player(t_game *game)
 {
 	int	x;
 	int	y;
-	int	flag;
+	int	player_count;
 
 	y = 0;
-	flag = 0;
+	player_count = 0;
 	while (game->map.grid && game->map.grid[y])
 	{
 		x = 0;
@@ -45,12 +45,14 @@ void	search_player(t_game *game)
 				|| game->map.grid[y][x] == 'E')
 			{
 				search_pos(y, x, game);
-				flag = 1;
+				player_count++;
 			}
 			x++;
 		}
 		y++;
 	}
-	if (flag == 0)
-		print_err("Player not found !", game);
+	if (player_count == 0)
+		print_err("Player not found!", game);
+	if (player_count > 1)
+		print_err("Multiple players found!", game);
 }

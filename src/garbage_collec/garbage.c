@@ -84,6 +84,7 @@ void	cleanup_game(t_game *game)
 	int	i;
 
 	i = 0;
+	get_next_line(-1);
 	free_config(&game->config);
 	free_map(&game->map);
 	if (game->mlx)

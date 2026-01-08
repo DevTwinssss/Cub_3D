@@ -29,3 +29,12 @@ C 200,200,2000 // max 255 [done]
 C C 200,200,20 [done]
 
 SO SO textures/south.xpm [done]
+
+
+------------------------------------------
+WE src/textures/img3 [leak]
+
+invalid character in map [leaks][done]
+
+Map not valide leaks [Done]
+double  player [Done]

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hind <hind@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nahilal <nahilal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 17:03:05 by nahilal           #+#    #+#             */
-/*   Updated: 2026/01/07 18:23:20 by hind             ###   ########.fr       */
+/*   Updated: 2026/01/08 01:03:03 by nahilal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,12 @@ int	parse_map(int fd, t_game *game)
 		{
 			free(line);
 			print_err("Map not valide !", game);
-			return (-1);
 		}
 		if (game->map.width < (int)len)
-			game->map.width = len - 2;
+			game->map.width = len - 1;
 		free(line);
 		line = get_next_line(fd);
 	}
-	make_map_rectangular(game);
 	search_player(game);
 	flag_check(game);
 	return (0);
