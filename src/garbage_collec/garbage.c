@@ -31,6 +31,7 @@ void	init_game(t_game *game)
 	game->flag.we = 0;
 	game->flag.f = 0;
 	game->flag.c = 0;
+	game->current_line = NULL;
 }
 
 void	free_config(t_config *config)
@@ -85,6 +86,11 @@ void	cleanup_game(t_game *game)
 
 	i = 0;
 	get_next_line(-1);
+	if (game->current_line)
+	{
+		free(game->current_line);
+		game->current_line = NULL;
+	}
 	free_config(&game->config);
 	free_map(&game->map);
 	if (game->mlx)

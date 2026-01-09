@@ -102,15 +102,18 @@ int	parse_map(int fd, t_game *game)
 	line = get_next_line(fd);
 	while (line)
 	{
+		game->current_line = line;
 		len = ft_strlen(line);
 		if (help_parse_map(line, game, &map_start, len) == -1)
 		{
 			free(line);
+			game->current_line = NULL;
 			print_err("Map not valide !", game);
 		}
 		if (game->map.width < (int)len)
 			game->map.width = len - 1;
 		free(line);
+		game->current_line = NULL;
 		line = get_next_line(fd);
 	}
 	check_valide_map(game);

@@ -128,6 +128,7 @@ typedef struct s_game
 	void		*win;
 	void		*img;
 	int			*data;
+	char		*current_line;
 
 }	t_game;
 
