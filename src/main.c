@@ -29,7 +29,7 @@ int	main(int ac, char **av)
 	}
 	init_game(game);
 	if (parsing(av[1], game) == -1)
-		return (cleanup_game(game), 1);
+		print_err("File not found",game);
 	check_map(game);
 	make_map_rectangular(game);
 	init_graphics(game);

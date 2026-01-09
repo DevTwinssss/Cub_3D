@@ -14,7 +14,7 @@
 
 void	print_err(char *err, t_game *game)
 {
-	printf("Error: %s\n", err);
+	printf("Error\n%s\n", err);
 	cleanup_game(game);
 	exit(1);
 }

@@ -93,12 +93,12 @@ int	is_map_line(char *line)
 	int	i;
 
 	i = 0;
-	if (!line || line[0] == '\n')
-		return (0);
+	if (!line)
+		return (-1);
 	while (line[i])
 	{
 		if (!ft_strchr("01NSEW \n\r", line[i]))
-			return (0);
+			return (-1);
 		i++;
 	}
 	return (1);
