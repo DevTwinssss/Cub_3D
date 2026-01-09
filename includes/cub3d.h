@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nahilal <nahilal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hind <hind@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 17:33:01 by hind              #+#    #+#             */
-/*   Updated: 2026/01/09 02:11:18 by nahilal          ###   ########.fr       */
+/*   Updated: 2026/01/09 04:06:09 by hind             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ void	search_player(t_game *game);
 void	make_map_rectangular(t_game *game);
 void	check_valide_map(t_game *game);
 int		check_line(char *str);
-int	help_parse_map(char *line, t_game *game, int *map_start, size_t len);
+int		help_parse_map(char *line, t_game *game, int *map_start, size_t len);
 void	flag_check(t_game *game);
 // Garbage collector functions
 void	init_game(t_game *game);

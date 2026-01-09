@@ -61,12 +61,9 @@ int	check_floor_ceiling(char *line, t_game *game)
 
 char	*skip_spaces_and_dup(char *str)
 {
-	int		i;
-	int		start;
-	int		end;
-	int		len;
 	char	*result;
 
+	int (i), (start), (end), (len);
 	i = 0;
 	while (str[i] == ' ')
 		i++;
@@ -123,7 +120,6 @@ int	check_config(char *line, t_game *game)
 	return (1);
 }
 
-
 int	is_map_line(char *line)
 {
 	int	i;
@@ -133,11 +129,9 @@ int	is_map_line(char *line)
 		return (-1);
 	while (line[i])
 	{
-		
 		if (!ft_strchr("01NSEW \n\r", line[i]))
 			return (-1);
 		i++;
 	}
 	return (1);
 }
-

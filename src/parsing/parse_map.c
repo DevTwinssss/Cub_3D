@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nahilal <nahilal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hind <hind@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 17:03:05 by nahilal           #+#    #+#             */
-/*   Updated: 2026/01/09 03:43:15 by nahilal          ###   ########.fr       */
+/*   Updated: 2026/01/09 04:12:41 by hind             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	help_parse_map(char *line, t_game *game, int *map_start, size_t len)
 		check_config(line, game);
 	else if (check == 1)
 	{
-		
 		if (is_map_line(line) == 1)
 		{
 			*map_start = 1;
@@ -45,7 +44,7 @@ int	help_parse_map(char *line, t_game *game, int *map_start, size_t len)
 		}
 		else if (*map_start)
 			return (-1);
-		else 
+		else
 			print_err("Invalide Element", game);
 	}
 	return (0);
