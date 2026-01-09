@@ -87,7 +87,6 @@ char	*skip_spaces_and_dup(char *str)
 		i++;
 	}
 	result[len] = '\0';
-	printf("|%s|\n",result);
 	return (result);
 }
 
@@ -95,18 +94,26 @@ int	check_config(char *line, t_game *game)
 {
 	if (ft_strncmp(line, "NO ", 3) == 0)
 	{
+		if (game->config.no_path)
+			free(game->config.no_path);
 		game->config.no_path = skip_spaces_and_dup(line + 3);
 	}
 	else if (ft_strncmp(line, "SO ", 3) == 0)
 	{
+		if (game->config.so_path)
+			free(game->config.so_path);
 		game->config.so_path = skip_spaces_and_dup(line + 3);
 	}
 	else if (ft_strncmp(line, "WE ", 3) == 0)
 	{
+		if (game->config.we_path)
+			free(game->config.we_path);
 		game->config.we_path = skip_spaces_and_dup(line + 3);
 	}
 	else if (ft_strncmp(line, "EA ", 3) == 0)
 	{
+		if (game->config.ea_path)
+			free(game->config.ea_path);
 		game->config.ea_path = skip_spaces_and_dup(line + 3);
 	}
 	else if (check_floor_ceiling(line, game) == 1)

@@ -6,7 +6,7 @@
 /*   By: nahilal <nahilal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 17:02:22 by nahilal           #+#    #+#             */
-/*   Updated: 2026/01/09 01:07:26 by nahilal          ###   ########.fr       */
+/*   Updated: 2026/01/09 03:49:42 by nahilal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int	valide_name(char *str)
 	ext = ft_strrchr(str, '.');
 	if (!ext || ft_strcmp(ext, ".cub") != 0)
 	{
-		printf("Error: invalid file or cannot open.\n");
-		return (-1);
+		printf("Error\ninvalid file or cannot open.\n");
+		exit (1);
 	}
 	fd = open_file(str);
 	return (fd);

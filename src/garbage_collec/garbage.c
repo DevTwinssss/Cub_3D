@@ -14,6 +14,8 @@
 
 void	init_game(t_game *game)
 {
+	int	i;
+
 	game->config.no_path = NULL;
 	game->config.so_path = NULL;
 	game->config.we_path = NULL;
@@ -25,6 +27,7 @@ void	init_game(t_game *game)
 	game->map.height = 0;
 	game->mlx = NULL;
 	game->win = NULL;
+	game->img = NULL;
 	game->flag.so = 0;
 	game->flag.no = 0;
 	game->flag.ea = 0;
@@ -32,6 +35,12 @@ void	init_game(t_game *game)
 	game->flag.f = 0;
 	game->flag.c = 0;
 	game->current_line = NULL;
+	i = 0;
+	while (i < 4)
+	{
+		game->textures[i].img = NULL;
+		i++;
+	}
 }
 
 void	free_config(t_config *config)

@@ -6,7 +6,7 @@
 /*   By: nahilal <nahilal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 17:03:05 by nahilal           #+#    #+#             */
-/*   Updated: 2026/01/09 03:24:43 by nahilal          ###   ########.fr       */
+/*   Updated: 2026/01/09 03:43:15 by nahilal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void	check_valide_map(t_game *game)
 	i = 0;
 	while (game->map.grid[i])
 	{
-		printf("%s\n",game->map.grid[i]);
 		len = ft_strlen(game->map.grid[i]);
 		if (len == 0)
 			print_err("Invalide map!", game);
