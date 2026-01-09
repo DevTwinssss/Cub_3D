@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hind <hind@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nahilal <nahilal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 17:33:01 by hind              #+#    #+#             */
-/*   Updated: 2026/01/09 04:06:09 by hind             ###   ########.fr       */
+/*   Updated: 2026/01/10 00:37:56 by nahilal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,12 +160,15 @@ void	check_valide_map(t_game *game);
 int		check_line(char *str);
 int		help_parse_map(char *line, t_game *game, int *map_start, size_t len);
 void	flag_check(t_game *game);
+char	*skip_spaces_and_dup(char *str);
+
 // Garbage collector functions
 void	init_game(t_game *game);
 void	free_config(t_config *config);
 void	free_map(t_map *map);
 void	cleanup_game(t_game *game);
 void	print_err(char *err, t_game *game);
+void	clean_graphics(t_game *game);
 
 // raycasting
 int		is_press(int keycode, t_game *game);

@@ -116,20 +116,3 @@ void	clean_graphics(t_game *game)
 		free(game->mlx);
 	}
 }
-
-void	cleanup_game(t_game *game)
-{
-	int	i;
-
-	i = 0;
-	get_next_line(-1);
-	if (game->current_line)
-	{
-		free(game->current_line);
-		game->current_line = NULL;
-	}
-	free_config(&game->config);
-	free_map(&game->map);
-	clean_graphics(game);
-	free(game);
-}
