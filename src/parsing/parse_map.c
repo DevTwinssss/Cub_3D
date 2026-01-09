@@ -6,7 +6,7 @@
 /*   By: nahilal <nahilal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 17:03:05 by nahilal           #+#    #+#             */
-/*   Updated: 2026/01/09 02:22:45 by nahilal          ###   ########.fr       */
+/*   Updated: 2026/01/09 03:24:43 by nahilal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	help_parse_map(char *line, t_game *game, int *map_start, size_t len)
 		}
 		else if (*map_start)
 			return (-1);
-		else
+		else 
 			print_err("Invalide Element", game);
 	}
 	return (0);
@@ -83,18 +83,12 @@ void	check_valide_map(t_game *game)
 	i = 0;
 	while (game->map.grid[i])
 	{
-		game->current_line = line;
-		len = ft_strlen(line);
-		if (help_parse_map(line, game, &map_start, len) == -1)
-		{
-			free(line);
-			game->current_line = NULL;
-			print_err("Map not valide !", game);
-		}
-		if (game->map.width < (int)len)
-			game->map.width = len - 1;
-		free(line);
-		game->current_line = NULL;
-		line = get_next_line(fd);
+		printf("%s\n",game->map.grid[i]);
+		len = ft_strlen(game->map.grid[i]);
+		if (len == 0)
+			print_err("Invalide map!", game);
+		else if (check_line(game->map.grid[i]) == -1)
+			print_err("Invalide map!", game);
+		i++;
 	}
 }

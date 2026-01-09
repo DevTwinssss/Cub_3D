@@ -61,32 +61,19 @@ int	check_floor_ceiling(char *line, t_game *game)
 
 char	*skip_spaces_and_dup(char *str)
 {
-	int		i;
-	int		start;
-	int		len;
-	char	*result;
+	int	i;
+	int	start;
 
 	i = 0;
+	printf("->%s\n", str);
 	while (str[i] == ' ')
 		i++;
 	start = i;
-	len = 0;
 	while (str[i] && str[i] != '\n' && str[i] != '\r')
-	{
-		len++;
 		i++;
-	}
-	result = malloc(len + 1);
-	if (!result)
-		return (NULL);
-	i = 0;
-	while (i < len)
-	{
-		result[i] = str[start + i];
-		i++;
-	}
-	result[len] = '\0';
-	return (result);
+	str[i] = '\0';
+	printf("|%s|\n", str + start);
+	return (ft_strdup(str + start));
 }
 
 int	check_config(char *line, t_game *game)
@@ -113,6 +100,7 @@ int	check_config(char *line, t_game *game)
 		return (0);
 	return (1);
 }
+
 
 int	is_map_line(char *line)
 {
