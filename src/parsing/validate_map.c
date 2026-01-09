@@ -59,26 +59,44 @@ int	check_floor_ceiling(char *line, t_game *game)
 	return (0);
 }
 
+char *skip_spaces(char *str)
+{
+	int i;
+
+	i = 0;
+	printf("->%s\n",str);
+	while(str[i])
+	{
+		if(str[i] != ' ')
+		{
+			printf("|%s|\n",str+i);
+			return (str + i);
+		}
+		i++;
+	}
+	return (NULL);
+}
+
 int	check_config(char *line, t_game *game)
 {
 	if (ft_strncmp(line, "NO ", 3) == 0)
 	{
-		game->config.no_path = ft_strdup(line + 3);
+		game->config.no_path = skip_spaces(ft_strdup(line + 3));
 		remove_newline(game->config.no_path);
 	}
 	else if (ft_strncmp(line, "SO ", 3) == 0)
 	{
-		game->config.so_path = ft_strdup(line + 3);
+		game->config.so_path = skip_spaces(ft_strdup(line + 3));
 		remove_newline(game->config.so_path);
 	}
 	else if (ft_strncmp(line, "WE ", 3) == 0)
 	{
-		game->config.we_path = ft_strdup(line + 3);
+		game->config.we_path = skip_spaces(ft_strdup(line + 3));
 		remove_newline(game->config.we_path);
 	}
 	else if (ft_strncmp(line, "EA ", 3) == 0)
 	{
-		game->config.ea_path = ft_strdup(line + 3);
+		game->config.ea_path = skip_spaces(ft_strdup(line + 3));
 		remove_newline(game->config.ea_path);
 	}
 	else if (check_floor_ceiling(line, game) == 1)
@@ -97,6 +115,7 @@ int	is_map_line(char *line)
 		return (-1);
 	while (line[i])
 	{
+		
 		if (!ft_strchr("01NSEW \n\r", line[i]))
 			return (-1);
 		i++;

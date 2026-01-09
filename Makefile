@@ -1,6 +1,6 @@
 NAME = cub3d
 CC = cc
-CFLAGS = -Werror -Wextra -Wall
+CFLAGS = -Werror -Wextra -Wall -fsanitize=address
 HEADER = includes/cub3d.h
 
 SRC := 	$(wildcard src/parsing/*.c) \

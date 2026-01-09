@@ -31,6 +31,7 @@ void	init_game(t_game *game)
 	game->flag.we = 0;
 	game->flag.f = 0;
 	game->flag.c = 0;
+	game->current_line = NULL;
 }
 
 void	free_config(t_config *config)
@@ -79,12 +80,22 @@ void	free_map(t_map *map)
 	map->width = 0;
 }
 
+void	free_curr(t_game *game)
+{
+	if (game->current_line)
+	{
+		free(game->current_line);
+		game->current_line = NULL;
+	}
+}
+
 void	cleanup_game(t_game *game)
 {
 	int	i;
 
 	i = 0;
 	get_next_line(-1);
+	free_curr(game);
 	free_config(&game->config);
 	free_map(&game->map);
 	if (game->mlx)
