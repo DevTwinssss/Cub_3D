@@ -1,7 +1,7 @@
 C 135,206 ,235
-F 0,1003,0
+F 0,103,0
 
-SO src/textures/img1.xpm
+SO       src/textures/img1.xpm
 NO src/textures/img2.xpm
 WE src/textures/img3.xpm
 EA src/textures/img4.xpm

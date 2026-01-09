@@ -80,6 +80,15 @@ void	free_map(t_map *map)
 	map->width = 0;
 }
 
+void	free_curr(t_game *game)
+{
+	if (game->current_line)
+	{
+		free(game->current_line);
+		game->current_line = NULL;
+	}
+}
+
 void	cleanup_game(t_game *game)
 {
 	int	i;
