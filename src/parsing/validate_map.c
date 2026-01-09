@@ -87,6 +87,7 @@ char	*skip_spaces_and_dup(char *str)
 		i++;
 	}
 	result[len] = '\0';
+	printf("|%s|\n",result);
 	return (result);
 }
 
@@ -132,3 +133,4 @@ int	is_map_line(char *line)
 	}
 	return (1);
 }
+
