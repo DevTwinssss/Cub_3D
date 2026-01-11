@@ -1,4 +1,4 @@
-NAME = cub3d
+NAME = cub3D
 CC = cc
 CFLAGS = -Werror -Wextra -Wall
 HEADER = includes/cub3d.h

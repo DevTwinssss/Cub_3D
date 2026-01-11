@@ -6,7 +6,7 @@
 /*   By: nahilal <nahilal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 17:58:56 by nahilal           #+#    #+#             */
-/*   Updated: 2026/01/10 00:37:14 by nahilal          ###   ########.fr       */
+/*   Updated: 2026/01/11 00:57:47 by nahilal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	check_es_we(t_game *game, char *line)
 		if (game->config.we_path)
 			free(game->config.we_path);
 		game->config.we_path = skip_spaces_and_dup(line + 3);
+		check_valide_path_conf(game->config.we_path, game);
 		return (1);
 	}
 	else if (ft_strncmp(line, "EA ", 3) == 0)
@@ -60,6 +61,7 @@ int	check_es_we(t_game *game, char *line)
 		if (game->config.ea_path)
 			free(game->config.ea_path);
 		game->config.ea_path = skip_spaces_and_dup(line + 3);
+		check_valide_path_conf(game->config.ea_path, game);
 		return (1);
 	}
 	return (0);
@@ -72,12 +74,14 @@ int	check_config(char *line, t_game *game)
 		if (game->config.no_path)
 			free(game->config.no_path);
 		game->config.no_path = skip_spaces_and_dup(line + 3);
+		check_valide_path_conf(game->config.no_path, game);
 	}
 	else if (ft_strncmp(line, "SO ", 3) == 0)
 	{
 		if (game->config.so_path)
 			free(game->config.so_path);
 		game->config.so_path = skip_spaces_and_dup(line + 3);
+		check_valide_path_conf(game->config.so_path, game);
 	}
 	else if (check_es_we(game, line) == 1)
 		return (1);

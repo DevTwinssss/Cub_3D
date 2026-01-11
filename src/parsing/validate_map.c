@@ -28,22 +28,6 @@ void	validate_config(t_game *game)
 		print_err("Missing C color", game);
 }
 
-void	remove_newline(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '\n' || str[i] == '\r')
-		{
-			str[i] = '\0';
-			return ;
-		}
-		i++;
-	}
-}
-
 char	*skip_spaces_and_dup(char *str)
 {
 	char	*result;

@@ -12,6 +12,16 @@
 
 #include "../../includes/cub3d.h"
 
+char	*check_valide_path_conf(char *s, t_game *game)
+{
+	char	*str;
+
+	str = ft_strrchr(s, '.');
+	if (!str || ft_strcmp(str, ".xpm") != 0)
+		print_err("invalid extension", game);
+	return (s);
+}
+
 void	help_add_line(t_game *game, char **new_grid, int i, char *cleaned_line)
 {
 	new_grid[i] = cleaned_line;

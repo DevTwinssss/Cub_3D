@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initializing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hind <hind@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nahilal <nahilal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:55:15 by hind              #+#    #+#             */
-/*   Updated: 2026/01/07 20:25:36 by hind             ###   ########.fr       */
+/*   Updated: 2026/01/10 22:10:56 by nahilal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	load_textures(t_game *game)
 				&game->textures[i].width, &game->textures[i].height);
 		if (!game->textures[i].img)
 		{
-			perror("Error: Failed to load texture");
+			perror("Error\nFailed to load texture");
 			cleanup_game(game);
 			exit(1);
 		}
@@ -77,7 +77,7 @@ void	init_graphics(t_game *game)
 	game->mlx = mlx_init();
 	if (!game->mlx)
 	{
-		printf("Error MLX init failed\n");
+		printf("Error\n MLX init failed\n");
 		cleanup_game(game);
 		exit(1);
 	}

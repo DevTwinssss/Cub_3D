@@ -24,7 +24,7 @@ int	main(int ac, char **av)
 	game = malloc(sizeof(t_game));
 	if (!game)
 	{
-		perror("Error Malloc failed\n");
+		perror("Error\n Malloc failed\n");
 		return (1);
 	}
 	init_game(game);

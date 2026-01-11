@@ -6,7 +6,7 @@
 /*   By: nahilal <nahilal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 17:33:01 by hind              #+#    #+#             */
-/*   Updated: 2026/01/10 00:37:56 by nahilal          ###   ########.fr       */
+/*   Updated: 2026/01/11 00:58:23 by nahilal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,12 +139,11 @@ int		ft_strcmp(const char *s1, const char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strchr(const char *s, int c);
 int		ft_atoi(const char *str);
-char	**ft_split(char const *s, char c);
 
 //parsing 
 int		parsing(char *str, t_game *game);
 int		parse_map(int fd, t_game *game);
-int		valide_name(char *str);
+int		valide_name(char *str, t_game *game);
 int		open_file(char *str);
 int		check_config(char *line, t_game *game);
 void	add_line_map(char *line, t_game *game);
@@ -161,6 +160,7 @@ int		check_line(char *str);
 int		help_parse_map(char *line, t_game *game, int *map_start, size_t len);
 void	flag_check(t_game *game);
 char	*skip_spaces_and_dup(char *str);
+char	*check_valide_path_conf(char *s, t_game *game);
 
 // Garbage collector functions
 void	init_game(t_game *game);

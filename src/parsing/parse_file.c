@@ -6,7 +6,7 @@
 /*   By: nahilal <nahilal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 17:02:22 by nahilal           #+#    #+#             */
-/*   Updated: 2026/01/09 03:49:42 by nahilal          ###   ########.fr       */
+/*   Updated: 2026/01/11 00:58:39 by nahilal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,14 @@ int	open_file(char *str)
 	return (fd);
 }
 
-int	valide_name(char *str)
+int	valide_name(char *str, t_game *game)
 {
 	char	*ext;
 	int		fd;
 
 	ext = ft_strrchr(str, '.');
 	if (!ext || ft_strcmp(ext, ".cub") != 0)
-	{
-		printf("Error\ninvalid file or cannot open.\n");
-		exit (1);
-	}
+		print_err("invalid file or cannot open", game);
 	fd = open_file(str);
 	return (fd);
 }

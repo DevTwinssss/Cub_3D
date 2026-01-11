@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hind <hind@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: nahilal <nahilal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 17:03:05 by nahilal           #+#    #+#             */
-/*   Updated: 2026/01/09 04:12:41 by hind             ###   ########.fr       */
+/*   Updated: 2026/01/11 01:02:44 by nahilal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void	check_valide_map(t_game *game)
 	size_t	len;
 
 	i = 0;
+	if (!game->map.grid)
+		print_err("Invalide map", game);
 	while (game->map.grid[i])
 	{
 		len = ft_strlen(game->map.grid[i]);
