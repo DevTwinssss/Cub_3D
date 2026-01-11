@@ -1,10 +1,10 @@
-C 135,206, 44
-F 0,023,0
+F 0,100,0
+C 135,206,235
 
-NO src/textures/aaaa.xpm    
-SO src/textures/hem_1.xpm
-WE src/textures/cat.xpm
-EA src/textures/donkey.xpm
+NO src/textures/img1.xpm
+SO src/textures/img2.xpm
+WE src/textures/img3.xpm
+EA src/textures/img4.xpm
 
 
 
